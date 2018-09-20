@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".loginActivity.loginactivity"
+    tools:layout_editor_absoluteY="81dp">
+
+
+    <EditText
+        android:id="@+id/user_id1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="111dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/user_password1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="password"
+        app:layout_constraintStart_toStartOf="@+id/user_id1"
+        app:layout_constraintTop_toBottomOf="@+id/user_id1" />
+
+    <Button
+        android:id="@+id/user_signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorPrimary"
+        android:text="로그인"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_password1" />
+
+    <Button
+        android:id="@+id/button_create_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="21dp"
+        android:background="#ffffff"
+        android:text="아직 회원이 아니세요? 지금 회원가입 하세요"
+        android:textColor="#4286f4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_signIn" />
+
+
+</android.support.constraint.ConstraintLayout>
