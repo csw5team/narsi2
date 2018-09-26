@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginActivity.loginactivity"
+    tools:context=".loginActivity.loginActivity"
     tools:layout_editor_absoluteY="81dp">
 
 
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:hint="password"
         app:layout_constraintStart_toStartOf="@+id/user_id1"
         app:layout_constraintTop_toBottomOf="@+id/user_id1" />

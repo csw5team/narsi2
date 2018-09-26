@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import org.csw.narsi2.MainActivity;
 import org.csw.narsi2.R;
 
-public class loginactivity extends AppCompatActivity {
+public class loginActivity extends AppCompatActivity {
 
     private Button bt_create_user, bt_user_signin;
     private EditText userId, userPassword;
@@ -48,7 +48,7 @@ public class loginactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (userId.getText().toString().equals("") || userPassword.getText().toString().equals(""))
-                    Toast.makeText(loginactivity.this, "아이디, 비밀번호가 유효하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(loginActivity.this, "아이디, 비밀번호가 유효하지 않습니다.", Toast.LENGTH_SHORT).show();
                 else
                     signIn(userId.getText().toString(), userPassword.getText().toString());
 
@@ -64,7 +64,7 @@ public class loginactivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(loginactivity.this, MainActivity.class));
+            startActivity(new Intent(loginActivity.this, MainActivity.class));
         }
     }
 
@@ -78,12 +78,12 @@ public class loginactivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
-                                Toast.makeText(loginactivity.this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(loginactivity.this, MainActivity.class));
+                                Toast.makeText(loginActivity.this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(loginActivity.this, MainActivity.class));
                             }
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(loginactivity.this, "아이디, 비밀번호를 확인해 주세요.",
+                            Toast.makeText(loginActivity.this, "아이디, 비밀번호를 확인해 주세요.",
                                     Toast.LENGTH_SHORT).show();
                         }
 

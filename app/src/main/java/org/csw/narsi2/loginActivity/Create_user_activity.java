@@ -39,7 +39,7 @@ public class Create_user_activity extends AppCompatActivity{
             public void onClick(View v) {
                 if(!(email.getText().toString().equals("") || password.getText().toString().equals(""))) {
                     createAccount(email.getText().toString().trim(), password.getText().toString().trim());
-                    startActivity(new Intent(Create_user_activity.this, loginactivity.class));
+                    startActivity(new Intent(Create_user_activity.this, loginActivity.class));
                     finish();
                 }else
                     Toast.makeText(Create_user_activity.this,"아이디, 비밀번호가 유효하지 않습니다.",Toast.LENGTH_SHORT).show();
@@ -68,7 +68,7 @@ public class Create_user_activity extends AppCompatActivity{
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(Create_user_activity.this, "Authentication failed.",
+                            Toast.makeText(Create_user_activity.this, "회원가입 실패",
                                     Toast.LENGTH_SHORT).show();
                         }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Narsi2</string>
+    <string name="app_name">나르시</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->

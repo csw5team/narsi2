@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.csw.narsi2.loginActivity.loginactivity;
+import org.csw.narsi2.loginActivity.loginActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this,"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, loginactivity.class));
+                startActivity(new Intent(MainActivity.this, loginActivity.class));
                 finish();
             }
         });
