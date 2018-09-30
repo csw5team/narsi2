@@ -60,7 +60,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         location = locationManager.getLastKnownLocation(bestProvider);
+        if (location != null) {
+            lat = location.getLatitude();
+            lng = location.getLongitude();
 
+        }
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -123,6 +127,19 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, loginActivity.class));
                 finish();
+            }
+        });
+        location = locationManager.getLastKnownLocation(bestProvider);
+        if (location != null) {
+            lat = location.getLatitude();
+            lng = location.getLongitude();
+
+        }
+        Button button = (Button) findViewById(R.id.showLatLng);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "위도 : "+MainActivity.this.getLat()+"경도 : "+MainActivity.this.getLng(), Toast.LENGTH_LONG).show();
             }
         });
 
