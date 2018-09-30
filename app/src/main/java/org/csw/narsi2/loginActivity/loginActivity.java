@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.csw.narsi2.MainActivity;
 import org.csw.narsi2.R;
+import org.csw.narsi2.getLatLng;
 
 public class loginActivity extends AppCompatActivity {
 
@@ -64,7 +65,7 @@ public class loginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(loginActivity.this, MainActivity.class));
+            startActivity(new Intent(loginActivity.this, getLatLng.class));
         }
     }
 
@@ -79,7 +80,7 @@ public class loginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
                                 Toast.makeText(loginActivity.this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(loginActivity.this, MainActivity.class));
+                                startActivity(new Intent(loginActivity.this, getLatLng.class));
                             }
                         } else {
                             // If sign in fails, display a message to the user.
