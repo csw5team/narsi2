@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mAuth = FirebaseAuth.getInstance();
                 mAuth.signOut();
+                Toast.makeText(MainActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(), loginActivity.class);
                 startActivity(intent);
                 finish();
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject main_object = response.getJSONObject("main");
                     String temp = String.valueOf((int)(main_object.getDouble("temp")-273));
                     String humidity = String.valueOf(main_object.getInt("humidity"));
-                    tempNow.setText("현재온도 : "+temp+"ºC");
+                    tempNow.setText("현재온도 : "+Math.round(Integer.parseInt(temp))+"ºC");
                     wetRatio.setText("현재 습도 : "+humidity+"%");
 
                     JSONArray array = response.getJSONArray("weather");

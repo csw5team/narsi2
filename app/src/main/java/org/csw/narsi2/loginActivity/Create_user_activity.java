@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.csw.narsi2.R;
 
-public class Create_user_activity extends AppCompatActivity{
+public class Create_user_activity extends AppCompatActivity {
 
     private EditText email, password;
     private Button createUser;
@@ -37,12 +37,16 @@ public class Create_user_activity extends AppCompatActivity{
         createUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!(email.getText().toString().equals("") || password.getText().toString().equals(""))) {
+                if (!(email.getText().toString().equals("") || password.getText().toString().equals(""))) {
                     createAccount(email.getText().toString().trim(), password.getText().toString().trim());
-                    startActivity(new Intent(Create_user_activity.this, loginActivity.class));
-                    finish();
-                }else
-                    Toast.makeText(Create_user_activity.this,"아이디, 비밀번호가 유효하지 않습니다.",Toast.LENGTH_SHORT).show();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                } else
+                    Toast.makeText(Create_user_activity.this, "아이디, 비밀번호가 유효하지 않습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -63,13 +67,14 @@ public class Create_user_activity extends AppCompatActivity{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            //FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(Create_user_activity.this,"회원가입 성공", Toast.LENGTH_SHORT).show();
-
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(Create_user_activity.this, "회원가입 성공", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(Create_user_activity.this, loginActivity.class));
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(Create_user_activity.this, "회원가입 실패",
-                                    Toast.LENGTH_SHORT).show();
+                                    Toast.LENGTH_LONG).show();
                         }
 
 
@@ -78,9 +83,6 @@ public class Create_user_activity extends AppCompatActivity{
                 });
         // [END create_user_with_email]
     }
-    private class isValid{
-        private boolean flag;
 
-
-    }
+    
 }
