@@ -11,14 +11,16 @@
     <EditText
         android:id="@+id/user_id2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="111dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Email"
+        android:fontFamily="casual"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <EditText
         android:id="@+id/user_password2"
@@ -27,6 +29,7 @@
         android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="password"
+        android:fontFamily="casual"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="@+id/user_id2"
         app:layout_constraintTop_toBottomOf="@+id/user_id2" />
@@ -38,8 +41,22 @@
         android:layout_marginTop="30dp"
         android:background="@color/colorPrimary"
         android:text="회원가입"
+        android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_password2" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/main" />
 
 </android.support.constraint.ConstraintLayout>
