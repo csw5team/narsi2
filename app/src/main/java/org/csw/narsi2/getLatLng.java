@@ -1,7 +1,6 @@
 package org.csw.narsi2;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -14,6 +13,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+import org.csw.narsi2.loginActivity.loginActivity;
 
 public class getLatLng extends AppCompatActivity {
     private LocationManager locationManager;
@@ -35,22 +39,7 @@ public class getLatLng extends AppCompatActivity {
         criteria.setCostAllowed(true);
 
         final String bestProvider = locationManager.getBestProvider(criteria, true);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        location = locationManager.getLastKnownLocation(bestProvider);
-        if (location != null) {
-            lat = location.getLatitude();
-            lng = location.getLongitude();
 
-        }
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -58,7 +47,7 @@ public class getLatLng extends AppCompatActivity {
                 if (location != null) {
                     lat = location.getLatitude();
                     lng = location.getLongitude();
-
+                    workDone();
                 }
             }
 
@@ -73,6 +62,7 @@ public class getLatLng extends AppCompatActivity {
                 if (location != null) {
                     lat = location.getLatitude();
                     lng = location.getLongitude();
+                    workDone();
 
                 }
             }
@@ -84,8 +74,7 @@ public class getLatLng extends AppCompatActivity {
 
         };
 
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -94,16 +83,23 @@ public class getLatLng extends AppCompatActivity {
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            Toast.makeText(this, "앱 실행을 위해 위치정보 제공 동의가 필요합니다.", Toast.LENGTH_SHORT).show();
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, loginActivity.class));
+            return;
+        }
 
-        } else {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        location = locationManager.getLastKnownLocation(bestProvider);
+        if (location != null) {
+            lat = location.getLatitude();
+            lng = location.getLongitude();
+            workDone();
 
         }
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("lat",lat);
-        intent.putExtra("lng",lng);
-        startActivity(intent);
+
+
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -115,13 +111,28 @@ public class getLatLng extends AppCompatActivity {
             }
         }
     }
+
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
 
         // Remove the activity when its off the screen
+
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        locationManager.removeUpdates(this.locationListener);
+
+    }
+
+    private void workDone() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("lat", lat);
+        intent.putExtra("lng", lng);
+        startActivity(intent);
+    }
 }
 
