@@ -129,7 +129,7 @@ public class getLatLng extends AppCompatActivity {
     }
 
     private void workDone() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, getInfo.class);
         intent.putExtra("lat", lat);
         intent.putExtra("lng", lng);
         startActivity(intent);
