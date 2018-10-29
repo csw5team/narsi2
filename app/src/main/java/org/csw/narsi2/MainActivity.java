@@ -27,6 +27,7 @@ import org.csw.narsi2.loginActivity.loginActivity;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,15 +35,18 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button logOut;
+    private Button logOut,dbcheck;
     private TextView city, personalizing, tempNow, wetRatio, airPollution;
     private String temp, whereGu, humidity, nowWeather, airPollutionNow, tmax, tmin, wspd,wctIndex;
     private FirebaseAuth mAuth;
 
+    private ArrayList<String> Info = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        logOut = (Button) findViewById(R.id.logOut);
+        dbcheck = (Button) findViewById(R.id.dbcheck);
 
         setText();
         setDB();
@@ -56,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), loginActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        dbcheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DBcheck.class);
+                startActivity(intent);
             }
         });
     }
@@ -131,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         tempNow = (TextView) findViewById(R.id.temp);
         wetRatio = (TextView) findViewById(R.id.wetRatio);
         airPollution = (TextView) findViewById(R.id.airPollution);
-        logOut = (Button) findViewById(R.id.logOut);
 
         airPollution.setText("미세먼지 : "+airPollutionNow);
         city.setText(whereGu);
