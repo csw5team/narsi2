@@ -27,6 +27,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".loginActivity.Create_user_activity" />
         <activity android:name=".getLatLng" />
+        <activity android:name=".FeedbackActivity"></activity>
     </application>
 
 </manifest>
