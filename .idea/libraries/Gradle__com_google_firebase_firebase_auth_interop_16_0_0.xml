@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-auth-interop-16.0.0">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.0.aar/bf8127f36013ba13a0182c7162214362/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.0.aar/bf8127f36013ba13a0182c7162214362/jars/classes.jar!/" />
+      <root url="jar://D:/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.0.aar/fcf79702b4897998f1048b7f507e1959/jars/classes.jar!/" />
+      <root url="file://D:/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.0.aar/fcf79702b4897998f1048b7f507e1959/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
