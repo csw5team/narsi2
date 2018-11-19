@@ -18,10 +18,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import org.csw.narsi2.MainActivity;
 import org.csw.narsi2.R;
 import org.csw.narsi2.getLatLng;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class loginActivity extends AppCompatActivity {
 
@@ -80,7 +87,7 @@ public class loginActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+            Greeting();
             startActivity(new Intent(loginActivity.this, getLatLng.class));
         }
     }
@@ -95,7 +102,7 @@ public class loginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
-                                Toast.makeText(loginActivity.this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+                                Greeting();
                                 startActivity(new Intent(loginActivity.this, getLatLng.class));
                             }
                         } else {
@@ -108,6 +115,50 @@ public class loginActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+
+    public void Greeting() {
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            //String name = user.getDisplayName();
+
+            // Check if user's email is verified
+            // boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            final String uid = user.getUid();
+
+            DocumentReference docRef = db.collection("users").document(uid);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            String name = "";
+                            name = document.getString("UserName");
+                            if (name != null)
+                                Toast.makeText(loginActivity.this, name + "님 반갑습니다.", Toast.LENGTH_SHORT).show();
+                            else {
+                                Toast.makeText(loginActivity.this, "반갑습니다.", Toast.LENGTH_SHORT).show();
+
+                                Map<String, Object> data = new HashMap<>();
+                                data.put("UserName", "");
+                                db.collection("users").document(uid).set(data);
+
+                            }
+                        } else {
+                        }
+                    } else {
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -124,5 +175,4 @@ public class loginActivity extends AppCompatActivity {
             finish();
         }
     }
-
 }
