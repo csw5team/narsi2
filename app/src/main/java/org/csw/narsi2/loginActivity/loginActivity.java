@@ -52,7 +52,9 @@ public class loginActivity extends AppCompatActivity {
         bt_create_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(v.getContext(), Create_user_activity.class));
+                finish();
             }
         });
 
@@ -108,9 +110,6 @@ public class loginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
 
-                            Intent intent = getIntent();
-                            finish();
-                            startActivity(intent);
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -219,9 +218,9 @@ public class loginActivity extends AppCompatActivity {
                             db.collection("users").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Intent intent = getIntent();
+                                    /*Intent intent = getIntent();
                                     finish();
-                                    startActivity(intent);
+                                    startActivity(intent);*/
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
