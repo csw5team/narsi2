@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 
 import org.csw.narsi2.loginActivity.loginActivity;
@@ -35,18 +37,29 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button logOut,dbcheck;
+    private Button logOut, dbcheck, pageChange;
     private TextView city, personalizing, tempNow, wetRatio, airPollution;
-    private String temp, whereGu, humidity, nowWeather, airPollutionNow, tmax, tmin, wspd,wctIndex;
+    private String temp, whereGu, humidity, nowWeather, airPollutionNow, tmax, tmin, wspd, wctIndex;
     private FirebaseAuth mAuth;
 
-    private ArrayList<String> Info = new ArrayList<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         logOut = (Button) findViewById(R.id.logOut);
         dbcheck = (Button) findViewById(R.id.dbcheck);
+        pageChange = (Button) findViewById(R.id.pagechangebutton);
+
+        pageChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), personalizingInfo.class);
+                startActivity(intent);
+            }
+        });
 
         setText();
         setDB();
@@ -74,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
     public void setDB() { // firebase DB 데이터 쓰기 부분
 
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (user != null) {
             // Name, email address, and profile photo Url
             //String name = user.getDisplayName();
@@ -106,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             user1.put("tmin", tmin);
             user1.put("humidity", humidity);
             user1.put("wspd", wspd);
-            user1.put("wctIndex",wctIndex);
+            user1.put("wctIndex", wctIndex);
             user1.put("timestamp", FieldValue.serverTimestamp());
 
 
@@ -122,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                         }
                     });
+
         }
     }
 
@@ -143,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         wetRatio = (TextView) findViewById(R.id.wetRatio);
         airPollution = (TextView) findViewById(R.id.airPollution);
 
-        airPollution.setText("미세먼지 : "+airPollutionNow);
+        airPollution.setText("미세먼지 : " + airPollutionNow);
         city.setText(whereGu);
         personalizing.setText(nowWeather);
         tempNow.setText("현재온도 : " + temp + "ºC");
@@ -151,4 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }
