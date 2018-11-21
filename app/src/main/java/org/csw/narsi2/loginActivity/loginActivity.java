@@ -3,17 +3,19 @@ package org.csw.narsi2.loginActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
-import org.csw.narsi2.MainActivity;
+import org.csw.narsi2.personalizingInfo;
 import org.csw.narsi2.R;
 import org.csw.narsi2.getLatLng;
 
@@ -35,6 +37,9 @@ public class loginActivity extends AppCompatActivity {
     private Button bt_create_user, bt_user_signin;
     private EditText userId, userPassword;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    Boolean checked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +92,10 @@ public class loginActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
+
             Greeting();
-            startActivity(new Intent(loginActivity.this, getLatLng.class));
+
+
         }
     }
 
@@ -100,11 +107,11 @@ public class loginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            if (user != null) {
-                                Greeting();
-                                startActivity(new Intent(loginActivity.this, getLatLng.class));
-                            }
+
+                            Intent intent = getIntent();
+                            finish();
+                            startActivity(intent);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(loginActivity.this, "아이디, 비밀번호를 확인해 주세요.",
@@ -119,8 +126,7 @@ public class loginActivity extends AppCompatActivity {
 
 
     public void Greeting() {
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (user != null) {
             // Name, email address, and profile photo Url
             //String name = user.getDisplayName();
@@ -142,19 +148,88 @@ public class loginActivity extends AppCompatActivity {
                         if (document.exists()) {
                             String name = "";
                             name = document.getString("UserName");
-                            if (name != null)
-                                Toast.makeText(loginActivity.this, name + "님 반갑습니다.", Toast.LENGTH_SHORT).show();
-                            else {
-                                Toast.makeText(loginActivity.this, "반갑습니다.", Toast.LENGTH_SHORT).show();
+                            if (name != null) {
+                                if (name != "")
+                                    Toast.makeText(loginActivity.this, name + "님 반갑습니다.", Toast.LENGTH_SHORT).show();
+                                else {
+                                    Toast.makeText(loginActivity.this, "반갑습니다.", Toast.LENGTH_SHORT).show();
 
-                                Map<String, Object> data = new HashMap<>();
-                                data.put("UserName", "");
-                                db.collection("users").document(uid).set(data);
+                                    Map<String, Object> data = new HashMap<>();
+                                    data.put("UserName", "");
+                                    db.collection("users").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+                                        }
+                                    });
+
+                                }
+                            }
+                        } else {
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("UserName", "");
+                            db.collection("users").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Intent intent = getIntent();
+                                    finish();
+                                    startActivity(intent);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(loginActivity.this, "오류 발생", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    } else {
+                    }
+                }
+            });
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+
+                            checked = document.getBoolean("checked");
+                            if (checked != null) {
+                                Intent intent = new Intent(loginActivity.this, getLatLng.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent = new Intent(loginActivity.this, personalizingInfo.class);
+                                        startActivity(intent);
+                                    }
+                                }, 0);
 
                             }
                         } else {
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("casual", 0);
+                            db.collection("users").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Intent intent = getIntent();
+                                    finish();
+                                    startActivity(intent);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(loginActivity.this, "오류 발생", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
-                    } else {
                     }
                 }
             });
@@ -172,7 +247,8 @@ public class loginActivity extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            finish();
+
+
         }
     }
 }

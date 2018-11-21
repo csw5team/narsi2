@@ -37,11 +37,12 @@ public class DBcheck extends AppCompatActivity {
     private ListView listView;
     private Button changeNameButton, findNameButton;
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dbcheck);
-
         findDB();
 
         new Handler().postDelayed(new Runnable() {
@@ -74,8 +75,6 @@ public class DBcheck extends AppCompatActivity {
 
     public void findDB() {
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
             //String name = user.getDisplayName();
@@ -110,8 +109,6 @@ public class DBcheck extends AppCompatActivity {
 
     public void ChangeName(String myName) {
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
             //String name = user.getDisplayName();
@@ -143,8 +140,6 @@ public class DBcheck extends AppCompatActivity {
     }
 
     public void findName() {
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
             //String name = user.getDisplayName();

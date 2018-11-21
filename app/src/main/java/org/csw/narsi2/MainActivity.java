@@ -37,12 +37,13 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button logOut, dbcheck;
+    private Button logOut, dbcheck, pageChange;
     private TextView city, personalizing, tempNow, wetRatio, airPollution;
     private String temp, whereGu, humidity, nowWeather, airPollutionNow, tmax, tmin, wspd, wctIndex;
     private FirebaseAuth mAuth;
 
-    private ArrayList<String> Info = new ArrayList<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         logOut = (Button) findViewById(R.id.logOut);
         dbcheck = (Button) findViewById(R.id.dbcheck);
+        pageChange = (Button) findViewById(R.id.pagechangebutton);
+
+        pageChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), personalizingInfo.class);
+                startActivity(intent);
+            }
+        });
 
         setText();
         setDB();
@@ -77,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
     public void setDB() { // firebase DB 데이터 쓰기 부분
 
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (user != null) {
             // Name, email address, and profile photo Url
             //String name = user.getDisplayName();
