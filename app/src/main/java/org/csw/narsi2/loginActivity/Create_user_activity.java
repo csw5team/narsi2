@@ -40,7 +40,7 @@ public class Create_user_activity extends AppCompatActivity {
                 if (!(email.getText().toString().equals("") || password.getText().toString().equals(""))) {
                     createAccount(email.getText().toString().trim(), password.getText().toString().trim());
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
