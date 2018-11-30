@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import org.csw.narsi2.MainActivity;
+import org.csw.narsi2.User;
 import org.csw.narsi2.personalizingInfo;
 import org.csw.narsi2.R;
 import org.csw.narsi2.getLatLng;
@@ -36,10 +39,13 @@ public class loginActivity extends AppCompatActivity {
 
     private Button bt_create_user, bt_user_signin;
     private EditText userId, userPassword;
+    private User singleUser;
     private FirebaseAuth mAuth;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseUser user;
+    private FirebaseFirestore db;
+    private String uid;
     Boolean checked = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +64,6 @@ public class loginActivity extends AppCompatActivity {
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
         bt_user_signin = (Button) findViewById(R.id.user_signIn);
 
 
@@ -72,6 +77,8 @@ public class loginActivity extends AppCompatActivity {
 
             }
         });
+
+        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -92,13 +99,17 @@ public class loginActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
+        user = mAuth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (user != null) {
+                    Greeting();
+                }
+            }
+        }, 500);
 
-            Greeting();
-
-
-        }
     }
 
 
@@ -109,7 +120,10 @@ public class loginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-
+                            Toast.makeText(loginActivity.this, "반갑습니다!", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(loginActivity.this, getLatLng.class);
+                            startActivity(i);
+                            finish();
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -136,8 +150,7 @@ public class loginActivity extends AppCompatActivity {
             // The user's ID, unique to the Firebase project. Do NOT use this value to
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
-            final String uid = user.getUid();
-
+            uid = user.getUid();
             DocumentReference docRef = db.collection("users").document(uid);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -148,8 +161,8 @@ public class loginActivity extends AppCompatActivity {
                             String name = "";
                             name = document.getString("UserName");
                             if (name != null) {
-                                if (name != "")
-                                    Toast.makeText(loginActivity.this, name + "님 반갑습니다.", Toast.LENGTH_SHORT).show();
+                                if (!name.equals(""))
+                                    Toast.makeText(loginActivity.this, name + "님 어서오세요.", Toast.LENGTH_SHORT).show();
                                 else {
                                     Toast.makeText(loginActivity.this, "반갑습니다.", Toast.LENGTH_SHORT).show();
 
