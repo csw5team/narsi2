@@ -38,42 +38,47 @@
 
     <TextView
         android:id="@+id/weather_FD_text"
-        android:layout_width="wrap_content"
-        android:layout_height="101dp"
+        android:layout_width="283dp"
+        android:layout_height="58dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="casual"
         android:text="오늘 날씨가 어땠나요?"
-        android:textSize="60dp"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="130dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cloth_FD_text"
-        android:layout_width="wrap_content"
-        android:layout_height="185dp"
+        android:layout_width="333dp"
+        android:layout_height="104dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="casual"
         android:text="이 중 오늘 어떤 스타일에 \n가장 가까웠나요?"
-        android:textSize="60dp"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="393dp" />
+        app:layout_constraintTop_toBottomOf="@+id/weather_FD_text"
+        app:layout_constraintVertical_bias="0.328" />
 
     <Button
         android:id="@+id/button_hot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="36dp"
         android:fontFamily="casual"
         android:text="더웠어요"
-        android:textSize="30dp"
+        android:textSize="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="238dp" />
+        app:layout_constraintTop_toTopOf="@+id/button_cold" />
 
     <Button
         android:id="@+id/button_cold"
@@ -81,42 +86,45 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="추웠어요"
-        android:textSize="30dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="casual"
+        android:text="추웠어요"
+        android:textSize="10dp"
         app:layout_constraintEnd_toStartOf="@+id/button_good"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toEndOf="@+id/button_hot"
-        tools:layout_editor_absoluteY="238dp" />
+        app:layout_constraintTop_toBottomOf="@+id/weather_FD_text" />
 
     <Button
         android:id="@+id/button_good"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="36dp"
         android:fontFamily="casual"
         android:text="좋았어요"
-        android:textSize="30dp"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="238dp" />
+        tools:layout_editor_absoluteY="178dp" />
 
-    <Button
+    <!---<Button
         android:id="@+id/button_formal"
-        android:layout_width="96dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="100dp"
         android:fontFamily="casual"
         android:text="포멀"
-        android:textSize="30dp"
+        android:textSize="10dp"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="763dp" />
 
     <Button
         android:id="@+id/button_casual"
-        android:layout_width="121dp"
-        android:layout_height="68dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
+        android:layout_marginTop="16dp"
         android:text="캐주얼"
-        android:textSize="30dp"
+        android:textSize="10dp"
         app:layout_constraintStart_toEndOf="@+id/button_formal"
         app:layout_constraintTop_toTopOf="@+id/button_formal" />
 
@@ -128,11 +136,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="스포티"
-        android:textSize="30dp"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toEndOf="@+id/button_casual"
-        app:layout_constraintTop_toTopOf="@+id/button_casual" />
+        app:layout_constraintTop_toTopOf="@+id/button_casual" /> -->
 
 
 </android.support.constraint.ConstraintLayout>
