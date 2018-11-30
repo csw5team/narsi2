@@ -27,7 +27,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".loginActivity.Create_user_activity" />
         <activity android:name=".getLatLng" />
-        <activity android:name=".getInfo" />
         <activity android:name=".DBcheck" />
         <activity android:name=".personalizingInfo"></activity>
     </application>

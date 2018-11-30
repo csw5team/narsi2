@@ -30,50 +30,6 @@ public class getLatLng extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-        criteria.setPowerRequirement(Criteria.POWER_LOW);
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setSpeedRequired(false);
-        criteria.setCostAllowed(true);
-
-        final String bestProvider = locationManager.getBestProvider(criteria, true);
-
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Log.d("Location : ", location.toString());
-                if (location != null) {
-                    lat = location.getLatitude();
-                    lng = location.getLongitude();
-                    workDone();
-                }
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                Log.d("Location : ", location.toString());
-                if (location != null) {
-                    lat = location.getLatitude();
-                    lng = location.getLongitude();
-                    workDone();
-
-                }
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-
-        };
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -82,20 +38,19 @@ public class getLatLng extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            Toast.makeText(this, "앱 실행을 위해 위치정보 제공 동의가 필요합니다.", Toast.LENGTH_SHORT).show();
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(this, loginActivity.class));
             return;
         }
-
-        location = locationManager.getLastKnownLocation(bestProvider);
-        if (location != null) {
-            lat = location.getLatitude();
-            lng = location.getLongitude();
-            workDone();
-
+        Location initialLocation = locationManager != null ? locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER) : null;
+        lat = 37.550965;
+        lng = 126.940992;
+        if (initialLocation != null) {
+            lat = initialLocation.getLatitude();
+            lng = initialLocation.getLongitude();
         }
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("lat", lat);
+        intent.putExtra("lng", lng);
+        startActivity(intent);
 
 
     }
@@ -124,15 +79,8 @@ public class getLatLng extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        locationManager.removeUpdates(this.locationListener);
 
     }
 
-    private void workDone() {
-        Intent intent = new Intent(this, getInfo.class);
-        intent.putExtra("lat", lat);
-        intent.putExtra("lng", lng);
-        startActivity(intent);
-    }
 }
 
