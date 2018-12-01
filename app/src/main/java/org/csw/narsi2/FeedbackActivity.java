@@ -16,7 +16,7 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int a;
-                //setFeedback(); 피드백을 firebase에 입력하는 부분
+                // 피드백을 firebase에 입력하는 부분
             }
         };
 
