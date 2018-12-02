@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FeedbackActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="336dp"
+        android:layout_height="203dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="264dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/personalizing_2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="162dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="5"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/main_2" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="162dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="5"
+        android:background="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/title" />
+
+    <TextView
+        android:id="@+id/weather_FD_text"
+        android:layout_width="283dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="casual"
+        android:text="오늘 날씨가 어땠나요?"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/cloth_FD_text"
+        android:layout_width="333dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="casual"
+        android:text="이 중 오늘 어떤 스타일에 \n가장 가까웠나요?"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/buttonhot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="casual"
+        android:text="더웠어요"
+        android:textOff="더웠어요"
+        android:textOn="더웠어요"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/button_cold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_cold" />
+
+    <ToggleButton
+        android:id="@+id/button_cold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="추웠어요"
+        android:textOff="추웠어요"
+        android:textOn="추웠어요"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/cloth_FD_text"
+        app:layout_constraintEnd_toStartOf="@+id/button_good"
+        app:layout_constraintStart_toEndOf="@+id/buttonhot"
+        app:layout_constraintTop_toBottomOf="@+id/weather_FD_text" />
+
+    <ToggleButton
+        android:id="@+id/button_good"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="casual"
+        android:text="좋았어요"
+        android:textOff="좋았어요"
+        android:textOn="좋았어요"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/cloth_FD_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_cold"
+        app:layout_constraintTop_toBottomOf="@+id/weather_FD_text" />
+
+    <ToggleButton
+        android:id="@+id/button_casual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="캐주얼"
+        android:textOff="캐주얼"
+        android:textOn="캐주얼"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/button_sporty"
+        app:layout_constraintStart_toEndOf="@+id/button_formal"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+    <ToggleButton
+        android:id="@+id/button_sporty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="스포티"
+        android:textOff="스포티"
+        android:textOn="스포티"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_casual"
+        app:layout_constraintTop_toTopOf="@+id/button_casual" />
+
+    <ToggleButton
+        android:id="@+id/button_formal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="casual"
+        android:text="포멀"
+        android:textOff="포멀"
+        android:textOn="포멀"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_casual"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_casual"
+        app:layout_constraintVertical_bias="0.295" />
+
+    <ToggleButton
+        android:id="@+id/finished"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="완료"
+        android:textOff="완료"
+        android:textOn="완료"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_sporty"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</android.support.constraint.ConstraintLayout>

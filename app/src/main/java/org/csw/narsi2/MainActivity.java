@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_city, tv_personalizing, tv_tempNow, tv_wetRatio, tv_airPollution;
     private ProgressBar progressBar;
     private ConstraintLayout layout_waiting;
+    private Button goJisu;
 
     private String temperature, city, gu, humidity, nowWeather, airPollution, tmax, tmin, wspd, wctIndex;
     private Weather weather = Weather.getInstance();
@@ -111,6 +112,15 @@ public class MainActivity extends AppCompatActivity {
         targetURL = "http://api2.sktelecom.com/weather/current/hourly?version=1&lat=" + lat + "&lon=" + lng + "&appkey=" + apiKey;
 
         mAuth = FirebaseAuth.getInstance();
+
+        goJisu = (Button) findViewById(R.id.gojisu);
+        goJisu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), FeedbackActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override

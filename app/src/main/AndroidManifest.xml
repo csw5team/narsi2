@@ -28,7 +28,8 @@
         <activity android:name=".loginActivity.Create_user_activity" />
         <activity android:name=".getLatLng" />
         <activity android:name=".DBcheck" />
-        <activity android:name=".personalizingInfo"></activity>
+        <activity android:name=".personalizingInfo" />
+        <activity android:name=".FeedbackActivity"></activity>
     </application>
 
 </manifest>

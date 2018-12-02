@@ -147,6 +147,22 @@
         app:layout_constraintTop_toBottomOf="@+id/wetRatio"
         app:layout_constraintVertical_bias="0.851" />
 
+    <Button
+        android:id="@+id/gojisu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/dbcheck"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.772"
+        app:layout_constraintStart_toEndOf="@+id/pagechangebutton"
+        app:layout_constraintTop_toBottomOf="@+id/airPollution"
+        app:layout_constraintVertical_bias="0.851" />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/layout_waiting"
         android:layout_width="match_parent"
