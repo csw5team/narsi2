@@ -60,7 +60,7 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(new Intent(v.getContext(), Create_user_activity.class));
-                finish();
+
             }
         });
 
@@ -120,6 +120,7 @@ public class loginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            singleUser = new User();
                             Toast.makeText(loginActivity.this, "반갑습니다!", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(loginActivity.this, getLatLng.class);
                             startActivity(i);
@@ -150,8 +151,9 @@ public class loginActivity extends AppCompatActivity {
             // The user's ID, unique to the Firebase project. Do NOT use this value to
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
+            singleUser = new User();
             uid = user.getUid();
-            DocumentReference docRef = db.collection("users").document(uid);
+            DocumentReference docRef = db.collection("user_final").document(uid);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -168,7 +170,7 @@ public class loginActivity extends AppCompatActivity {
 
                                     Map<String, Object> data = new HashMap<>();
                                     data.put("UserName", "");
-                                    db.collection("users").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    db.collection("user_final").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
 
@@ -185,7 +187,7 @@ public class loginActivity extends AppCompatActivity {
                         } else {
                             Map<String, Object> data = new HashMap<>();
                             data.put("UserName", "");
-                            db.collection("users").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            db.collection("user_final").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Intent intent = getIntent();
@@ -227,8 +229,8 @@ public class loginActivity extends AppCompatActivity {
                             }
                         } else {
                             Map<String, Object> data = new HashMap<>();
-                            data.put("casual", 0);
-                            db.collection("users").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                            db.collection("user_final").document(uid).set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     /*Intent intent = getIntent();

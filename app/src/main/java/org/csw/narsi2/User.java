@@ -11,11 +11,11 @@ public class User implements Serializable {
 
     private Feedback feedback;
 
-    public User(int age, int gender, String userID) {
-        this.age = age;
-        this.gender = gender;
-        this.userID = userID;
+    public User() {
+        feedback = new Feedback();
+
     }
+
 
     public int getAge() {
         return age;

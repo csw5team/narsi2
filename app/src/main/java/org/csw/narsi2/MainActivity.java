@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     private String targetURL, targetURL2, targetURL3;
     private String apiKey, apiKey2;
 
-    private User currentUser;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private FirebaseUser user;
@@ -137,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 targetURL2 = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=" + city + "&pageNo=1&numOfRows=1&ServiceKey=" + apiKey2 + "&ver=1.3&_returnType=json";find_airPollution();
                 find_airPollution();
 
-                setDB();
             }
         }, 1000);
     }
@@ -236,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
         tv_personalizing.setText(nowWeather);
         tv_tempNow.setText("현재온도 : " + temperature + "ºC");
         tv_wetRatio.setText("현재습도 : " + humidity + "%");
+        setDB();
     }
 
     public void setDB() { // firebase DB 데이터 쓰기 부분
@@ -270,11 +269,10 @@ public class MainActivity extends AppCompatActivity {
             user1.put("tmin", tmin);
             user1.put("humidity", humidity);
             user1.put("wspd", wspd);
-            user1.put("wctIndex", wctIndex);
             user1.put("timestamp", FieldValue.serverTimestamp());
 
 
-            db.collection("users").document(uid).collection("WeatherInfo").document(getTimeYMD)
+            db.collection("user_final").document(uid).collection("WeatherInfo").document(getTimeYMD)
                     .set(user1)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -286,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                         }
                     });
+
 
         }
     }

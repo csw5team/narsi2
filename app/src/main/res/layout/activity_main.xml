@@ -46,7 +46,6 @@
         android:layout_height="35dp"
         android:layout_marginStart="37dp"
         android:fontFamily="casual"
-        android:text="city"
         android:textSize="20dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/personalizing"
         app:layout_constraintStart_toStartOf="parent" />
@@ -58,7 +57,6 @@
         android:layout_marginStart="9dp"
         android:layout_marginBottom="28dp"
         android:fontFamily="casual"
-        android:text="you_may_hot"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/wetRatio"
         app:layout_constraintStart_toEndOf="@+id/city" />
@@ -69,7 +67,6 @@
         android:layout_height="35dp"
         android:layout_marginStart="23dp"
         android:fontFamily="casual"
-        android:text="temp"
         android:textSize="20dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/personalizing"
         app:layout_constraintStart_toEndOf="@+id/personalizing" />
@@ -81,7 +78,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="casual"
-        android:text="wetRatio"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/airPollution"
         app:layout_constraintEnd_toStartOf="@+id/airPollution"
@@ -97,7 +93,6 @@
         android:layout_marginTop="160dp"
         android:layout_marginEnd="36dp"
         android:fontFamily="casual"
-        android:text="airPollution"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

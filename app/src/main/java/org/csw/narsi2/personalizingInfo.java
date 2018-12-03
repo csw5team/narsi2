@@ -27,8 +27,8 @@ import java.util.Map;
 public class personalizingInfo extends AppCompatActivity {
 
     private ToggleButton button_casual, button_sporty, button_formal, imhot, imcold, idontknow;
-    private int casual, sporty, formal = 0;
-    private double hot, cold = 0.0;
+    private int codiPreference;
+    private int tempPreference ;
     private Button saveButton;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -59,11 +59,10 @@ public class personalizingInfo extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    casual = 1;
+                    codiPreference = 1;
                     button_formal.setChecked(false);
                     button_sporty.setChecked(false);
                 } else {
-                    casual = 0;
 
                 }
             }
@@ -75,12 +74,11 @@ public class personalizingInfo extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    sporty = 1;
+                    codiPreference = 2;
                     button_casual.setChecked(false);
                     button_formal.setChecked(false);
 
                 } else {
-                    sporty = 0;
 
                 }
             }
@@ -92,12 +90,11 @@ public class personalizingInfo extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    formal = 1;
+                    codiPreference = 0;
                     button_casual.setChecked(false);
                     button_sporty.setChecked(false);
 
                 } else {
-                    formal = 0;
 
                 }
             }
@@ -123,11 +120,10 @@ public class personalizingInfo extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    hot = 0.3;
+                    tempPreference = 1;
                     imcold.setChecked(false);
                     idontknow.setChecked(false);
                 } else {
-                    hot = 0.0;
                 }
             }
         });
@@ -135,11 +131,10 @@ public class personalizingInfo extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    cold = 0.3;
+                    tempPreference = 1;
                     imhot.setChecked(false);
                     idontknow.setChecked(false);
                 } else {
-                    cold = 0;
                 }
             }
         });
@@ -165,17 +160,15 @@ public class personalizingInfo extends AppCompatActivity {
             public void onClick(View v) {
                 Map<String, Object> data = new HashMap<>();
 
-                data.put("casual", casual);
-                data.put("sporty", sporty);
-                data.put("formal", formal);
-                data.put("hot", hot);
-                data.put("cold", cold);
+                data.put("tempFeed", String.valueOf(tempPreference));
+                data.put("codiPref", String.valueOf(codiPreference));
+
                 data.put("checked", true);
 
                 if (user != null) {
                     final String uid = user.getUid();
 
-                    DocumentReference Ref = db.collection("users").document(uid);
+                    DocumentReference Ref = db.collection("user_final").document(uid);
 
                     Ref
                             .set(data, SetOptions.merge())
