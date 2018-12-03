@@ -13,22 +13,27 @@ import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static java.sql.Types.NULL;
 
 public class FeedbackActivity extends AppCompatActivity {
 
-    private int update_temp = -1;
+    private int update_temp = 0;
     private int recent_temp;
     private int update_codi = -1;
-    private User user;
     //private Feedback update_feedback = user.getFeedback();
     private ToggleButton btn_hot, btn_cold, btn_good, btn_casual, btn_sporty, btn_formal;
     private Feedback feedback;
     private Button btn_finish;
+    private String uid = FirebaseAuth.getInstance().getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +45,46 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void run() {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference docRef = db.collection("User").document("EETLkwTqY");
+                DocumentReference docRef = db.collection("user_final").document(uid);
                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             recent_temp = Integer.valueOf(document.getString("tempFeed"));
+                            if (recent_temp > 0) {
+                                btn_hot.setChecked(true);
+                            } else if (recent_temp < 0) {
+                                btn_cold.setChecked(true);
+                            } else {
+
+                            }
+                        } else {
+
+                        }
+                    }
+                });
+
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                String getTimeYMD = new SimpleDateFormat("yyyy-MM-dd").format(date);
+
+                DocumentReference docRef2 = db.collection("user_final").document(uid).collection("codiFeedback").document(getTimeYMD);
+                docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.getString("codiFeed") != null) {
+                                update_codi = Integer.valueOf(document.getString("codiFeed"));
+                                if (update_codi == 0) {
+                                    btn_formal.setChecked(true);
+                                } else if (update_codi == 1) {
+                                    btn_casual.setChecked(true);
+                                } else if (update_codi == 2) {
+                                    btn_sporty.setChecked(true);
+                                }
+                            }
                         } else {
 
                         }
@@ -55,7 +93,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
 
             }
-        }, 500);
+        }, 0);
 
         while (feedback == null) {
         }
@@ -79,7 +117,9 @@ public class FeedbackActivity extends AppCompatActivity {
 
                 } else {
                     recent_temp += update_temp;
-                    feedback.setDb(recent_temp);
+                    feedback.setDb(recent_temp, update_codi);
+                    Toast.makeText(FeedbackActivity.this,"저장되었습니다.",Toast.LENGTH_SHORT).show();
+                    FeedbackActivity.super.onBackPressed();
                 }
             }
         });

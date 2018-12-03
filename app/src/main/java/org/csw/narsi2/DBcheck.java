@@ -87,7 +87,7 @@ public class DBcheck extends AppCompatActivity {
             // FirebaseUser.getIdToken() instead.
             final String uid = user.getUid();
 
-            db.collection("users").document(uid).collection("WeatherInfo")
+            db.collection("user_final").document(uid).collection("WeatherInfo")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -121,7 +121,7 @@ public class DBcheck extends AppCompatActivity {
             // FirebaseUser.getIdToken() instead.
             final String uid = user.getUid();
 
-            DocumentReference name = db.collection("users").document(uid);
+            DocumentReference name = db.collection("user_final").document(uid);
             name
                     .update("UserName", myName)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -152,7 +152,7 @@ public class DBcheck extends AppCompatActivity {
             // FirebaseUser.getIdToken() instead.
             final String uid = user.getUid();
 
-            DocumentReference docRef = db.collection("users").document(uid);
+            DocumentReference docRef = db.collection("user_final").document(uid);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

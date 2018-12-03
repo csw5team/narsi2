@@ -41,8 +41,9 @@ public class getLatLng extends AppCompatActivity {
             return;
         }
         Location initialLocation = locationManager != null ? locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER) : null;
-        lat = 37.550965;
-        lng = 126.940992;
+        /*lat = initialLocation.getLatitude();
+        lng = initialLocation.getLongitude();*/
+
         if (initialLocation != null) {
             lat = initialLocation.getLatitude();
             lng = initialLocation.getLongitude();
@@ -76,11 +77,7 @@ public class getLatLng extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-    }
 
 }
 

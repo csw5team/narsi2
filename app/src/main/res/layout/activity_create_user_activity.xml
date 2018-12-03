@@ -38,13 +38,56 @@
         android:id="@+id/user_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="100dp"
         android:background="@color/colorPrimary"
         android:text="회원가입"
         android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_password2" />
+
+    <EditText
+        android:id="@+id/user_name"
+        android:layout_width="67dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:hint="이름"
+        app:layout_constraintBottom_toTopOf="@+id/user_signup"
+        app:layout_constraintEnd_toStartOf="@+id/user_age"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_password2" />
+    <EditText
+        android:id="@+id/user_age"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:hint="나이"
+        app:layout_constraintBottom_toTopOf="@+id/user_signup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_password2"
+        app:layout_constraintVertical_bias="0.473" />
+
+    <Spinner
+        android:id="@+id/user_sex"
+        android:layout_width="92dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/user_signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.699"
+        app:layout_constraintStart_toEndOf="@+id/user_age"
+        app:layout_constraintTop_toBottomOf="@+id/user_password2"
+        app:layout_constraintVertical_bias="0.514" />
 
     <ImageView
         android:id="@+id/imageView4"
