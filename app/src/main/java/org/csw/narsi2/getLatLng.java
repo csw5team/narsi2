@@ -3,7 +3,6 @@ package org.csw.narsi2;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,12 +11,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-
-import org.csw.narsi2.loginActivity.loginActivity;
 
 public class getLatLng extends AppCompatActivity {
     private LocationManager locationManager;
@@ -47,10 +40,22 @@ public class getLatLng extends AppCompatActivity {
         if (initialLocation != null) {
             lat = initialLocation.getLatitude();
             lng = initialLocation.getLongitude();
+        }else{
+            lat = 37;
+            lng = 127;
         }
-        Intent intent = new Intent(this, MainActivity.class);
+
+        Intent i = getIntent();
+        User singleuser= (User)i.getSerializableExtra("User");
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("User",singleuser);
+
+        Intent intent = new Intent(this, MainViewPager.class);
+        intent.putExtras(bundle);
         intent.putExtra("lat", lat);
         intent.putExtra("lng", lng);
+
         startActivity(intent);
 
 

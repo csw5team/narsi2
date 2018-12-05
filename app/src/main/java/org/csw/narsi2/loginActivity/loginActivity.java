@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,9 +25,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
-import org.csw.narsi2.MainActivity;
 import org.csw.narsi2.User;
-import org.csw.narsi2.personalizingInfo;
+import org.csw.narsi2.PreferenceController;
 import org.csw.narsi2.R;
 import org.csw.narsi2.getLatLng;
 
@@ -79,6 +77,7 @@ public class loginActivity extends AppCompatActivity {
         });
 
         mAuth = FirebaseAuth.getInstance();
+        singleUser = new User();
 
     }
 
@@ -123,6 +122,11 @@ public class loginActivity extends AppCompatActivity {
                             singleUser = new User();
                             Toast.makeText(loginActivity.this, "반갑습니다!", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(loginActivity.this, getLatLng.class);
+
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("User",singleUser);
+                            i.putExtras(bundle);
+
                             startActivity(i);
                             finish();
 
@@ -151,7 +155,6 @@ public class loginActivity extends AppCompatActivity {
             // The user's ID, unique to the Firebase project. Do NOT use this value to
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
-            singleUser = new User();
             uid = user.getUid();
             DocumentReference docRef = db.collection("user_final").document(uid);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -215,13 +218,23 @@ public class loginActivity extends AppCompatActivity {
                             checked = document.getBoolean("checked");
                             if (checked != null) {
                                 Intent intent = new Intent(loginActivity.this, getLatLng.class);
+
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("User",singleUser);
+                                intent.putExtras(bundle);
+
                                 startActivity(intent);
                                 finish();
                             } else {
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Intent intent = new Intent(loginActivity.this, personalizingInfo.class);
+                                        Intent intent = new Intent(loginActivity.this, PreferenceController.class);
+
+                                        Bundle bundle = new Bundle();
+                                        bundle.putSerializable("User",singleUser);
+                                        intent.putExtras(bundle);
+
                                         startActivity(intent);
                                     }
                                 }, 0);
