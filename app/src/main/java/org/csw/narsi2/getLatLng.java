@@ -41,8 +41,8 @@ public class getLatLng extends AppCompatActivity {
             lat = initialLocation.getLatitude();
             lng = initialLocation.getLongitude();
         }else{
-            lat = 37;
-            lng = 127;
+            lat = 37.5509442;
+            lng = 126.9410023;
         }
 
         Intent i = getIntent();

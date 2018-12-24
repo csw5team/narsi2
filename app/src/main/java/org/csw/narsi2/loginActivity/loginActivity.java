@@ -107,7 +107,7 @@ public class loginActivity extends AppCompatActivity {
                     Greeting();
                 }
             }
-        }, 500);
+        }, 0);
 
     }
 
@@ -119,16 +119,30 @@ public class loginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            singleUser = new User();
+
+                            /*
                             Toast.makeText(loginActivity.this, "반갑습니다!", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(loginActivity.this, getLatLng.class);
 
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable("User",singleUser);
+                            bundle.putSerializable("User", singleUser);
                             i.putExtras(bundle);
 
                             startActivity(i);
                             finish();
+                            */
+                            user = mAuth.getCurrentUser();
+                            db = FirebaseFirestore.getInstance();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (user != null) {
+                                        Greeting();
+                                    }
+                                }
+                            }, 0);
+
+
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -166,9 +180,10 @@ public class loginActivity extends AppCompatActivity {
                             String name = "";
                             name = document.getString("UserName");
                             if (name != null) {
-                                if (!name.equals(""))
+                                if (!name.equals("")) {
                                     Toast.makeText(loginActivity.this, name + "님 어서오세요.", Toast.LENGTH_SHORT).show();
-                                else {
+                                    singleUser.setName(name);
+                                } else {
                                     Toast.makeText(loginActivity.this, "반갑습니다.", Toast.LENGTH_SHORT).show();
 
                                     Map<String, Object> data = new HashMap<>();
@@ -220,7 +235,7 @@ public class loginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(loginActivity.this, getLatLng.class);
 
                                 Bundle bundle = new Bundle();
-                                bundle.putSerializable("User",singleUser);
+                                bundle.putSerializable("User", singleUser);
                                 intent.putExtras(bundle);
 
                                 startActivity(intent);
@@ -232,7 +247,7 @@ public class loginActivity extends AppCompatActivity {
                                         Intent intent = new Intent(loginActivity.this, PreferenceController.class);
 
                                         Bundle bundle = new Bundle();
-                                        bundle.putSerializable("User",singleUser);
+                                        bundle.putSerializable("User", singleUser);
                                         intent.putExtras(bundle);
 
                                         startActivity(intent);

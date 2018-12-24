@@ -26,6 +26,7 @@ public class Preference implements Serializable {
 
     private int CodiStyle;
     private int temp;
+    private boolean check = false;
 
     public Preference() {
     }
@@ -51,11 +52,10 @@ public class Preference implements Serializable {
         this.temp = temp;
     }
 
-    public void savePreference() {
+    public void savePreference(final String Uid) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
 
 
         Map<String, Object> data = new HashMap<>();
@@ -67,7 +67,7 @@ public class Preference implements Serializable {
 
         if (user != null) {
 
-            DocumentReference Ref = db.collection("user_final").document(uid);
+            DocumentReference Ref = db.collection("user_final").document(Uid);
 
             Ref
                     .set(data, SetOptions.merge())
@@ -84,54 +84,18 @@ public class Preference implements Serializable {
                     });
 
         }
+        check = true;
 
     }
 
-    public void getPreference() {
+    public Preference getPreference(final String Uid) {
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        final String uid = user.getUid();
+        if (check) {
+            return this;
+        } else {
+            return null;
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference docRef = db.collection("user_final").document(uid);
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            setTemp(Integer.valueOf(document.getString("tempFeed")));
-                        } else {
-
-                        }
-                    }
-                });
-
-                long now = System.currentTimeMillis();
-                Date date = new Date(now);
-                String getTimeYMD = new SimpleDateFormat("yyyy-MM-dd").format(date);
-
-                DocumentReference docRef2 = db.collection("user_final").document(uid).collection("codiFeedback").document(getTimeYMD);
-                docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.getString("codiFeed") != null) {
-                                setCodiStyle(Integer.valueOf(document.getString("codiFeed")));
-                            }
-                        } else {
-
-                        }
-                    }
-                });
-
-
-            }
-        }, 0);
+        }
 
     }
 }

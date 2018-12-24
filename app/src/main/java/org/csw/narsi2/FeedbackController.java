@@ -1,16 +1,19 @@
 package org.csw.narsi2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -20,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,9 +53,11 @@ public class FeedbackController extends Fragment {
     private int update_codi = 100;
     //private Feedback update_feedback = user.getFeedback();
     private ToggleButton btn_hot, btn_cold, btn_good, btn_casual, btn_sporty, btn_formal;
+    private boolean isCheck_hot, isCheck_cold, isCheck_good, isCheck_casual, isCheck_sporty, isCheck_formal = false;
     private Feedback feedback;
+    private TextView tv_weather;
     private Button btn_finish;
-    private String uid = FirebaseAuth.getInstance().getUid();
+    private String Uid = FirebaseAuth.getInstance().getUid();
 
     private OnFragmentInteractionListener mListener;
 
@@ -91,41 +98,40 @@ public class FeedbackController extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.setfeedbackform, container, false);
         feedback = new Feedback();
+        tv_weather = (TextView) view.findViewById(R.id.weather_FD_text);
+
+        Intent i = getActivity().getIntent();
+        final User singleuser = (User) i.getSerializableExtra("User");
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference docRef = db.collection("user_final").document(uid);
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            recent_temp = Integer.valueOf(document.getString("tempFeed"));
-                            if (recent_temp > 0) {
-                                btn_hot.setChecked(true);
-                            } else if (recent_temp < 0) {
-                                btn_cold.setChecked(true);
-                            } else {
-
-                            }
-                        } else {
-
-                        }
-                    }
-                });
 
                 long now = System.currentTimeMillis();
                 Date date = new Date(now);
                 String getTimeYMD = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
-                DocumentReference docRef2 = db.collection("user_final").document(uid).collection("codiFeedback").document(getTimeYMD);
-                docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference docRef = db.collection("user_final").document(Uid).collection("Feedback").document(getTimeYMD);
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
+                            String name = document.getString("name");
+                            tv_weather.setText("오늘 날씨가 " + singleuser.getName() + "님께 어땠나요?");
+
+                            if (document.getString("tempFeed") != null) {
+                                recent_temp = Integer.valueOf(document.getString("tempFeed"));
+                                if (recent_temp > 0) {
+                                    btn_hot.setChecked(true);
+                                } else if (recent_temp < 0) {
+                                    btn_cold.setChecked(true);
+                                } else {
+                                    btn_good.setChecked(true);
+
+                                }
+                            }
                             if (document.getString("codiFeed") != null) {
                                 update_codi = Integer.valueOf(document.getString("codiFeed"));
                                 if (update_codi == 0) {
@@ -139,15 +145,14 @@ public class FeedbackController extends Fragment {
                         } else {
 
                         }
+
+
                     }
                 });
 
 
             }
         }, 0);
-
-        while (feedback == null) {
-        }
 
 
         btn_hot = (ToggleButton) view.findViewById(R.id.button_hot);
@@ -163,15 +168,7 @@ public class FeedbackController extends Fragment {
         btn_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (update_temp == 100 && update_codi == 100) {
-                    Toast.makeText(getActivity(), "한 개 이상의 피드백을 제출하셔야 합니다", Toast.LENGTH_LONG).show();
-
-                } else {
-                    recent_temp += update_temp;
-                    feedback.setDb(recent_temp, update_codi);
-                    Toast.makeText(getActivity(),"저장되었습니다.",Toast.LENGTH_SHORT).show();
-
-                }
+                setFeedback(Uid, update_codi, update_temp);
             }
         });
 
@@ -182,6 +179,9 @@ public class FeedbackController extends Fragment {
                     btn_cold.setChecked(false);
                     btn_good.setChecked(false);
                     update_temp = 1;
+                    isCheck_hot = true;
+                } else {
+                    isCheck_hot = false;
                 }
             }
         });
@@ -193,6 +193,9 @@ public class FeedbackController extends Fragment {
                     btn_hot.setChecked(false);
                     btn_good.setChecked(false);
                     update_temp = -1;
+                    isCheck_cold = true;
+                } else {
+                    isCheck_cold = false;
                 }
             }
         });
@@ -204,6 +207,9 @@ public class FeedbackController extends Fragment {
                     btn_hot.setChecked(false);
                     btn_cold.setChecked(false);
                     update_temp = 0;
+                    isCheck_good = true;
+                } else {
+                    isCheck_good = false;
                 }
             }
         });
@@ -215,6 +221,9 @@ public class FeedbackController extends Fragment {
                     btn_sporty.setChecked(false);
                     btn_formal.setChecked(false);
                     update_codi = 1;
+                    isCheck_casual = true;
+                } else {
+                    isCheck_casual = false;
                 }
             }
         });
@@ -227,6 +236,9 @@ public class FeedbackController extends Fragment {
                     btn_sporty.setChecked(false);
                     btn_casual.setChecked(false);
                     update_codi = 0;
+                    isCheck_formal = true;
+                } else {
+                    isCheck_formal = false;
                 }
             }
         });
@@ -239,6 +251,9 @@ public class FeedbackController extends Fragment {
                     btn_casual.setChecked(false);
                     btn_formal.setChecked(false);
                     update_codi = 2;
+                    isCheck_sporty = true;
+                } else {
+                    isCheck_sporty = false;
                 }
             }
         });
@@ -277,5 +292,20 @@ public class FeedbackController extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void setFeedback(String Uid, int CodiFeedback, int update_temp) {
+        if (!((isCheck_formal || isCheck_casual || isCheck_sporty) || (isCheck_hot || isCheck_cold || isCheck_good))) {
+            Toast.makeText(getActivity(), "한 개 이상의 피드백을 제출하셔야 합니다", Toast.LENGTH_LONG).show();
+
+        } else if ((!isCheck_cold && !isCheck_hot && !isCheck_good)) {
+            feedback.setFeedback(Uid, CodiFeedback, update_temp);
+            Toast.makeText(getActivity(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
+
+        } else {
+            recent_temp += update_temp;
+            feedback.setFeedback(Uid, CodiFeedback, update_temp);
+            Toast.makeText(getActivity(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

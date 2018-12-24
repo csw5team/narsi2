@@ -242,11 +242,14 @@ public class recommendationController extends Fragment {
                     JSONObject whereGu = main_object.getJSONObject("grid");
                     gu = whereGu.getString("county");
                     city = (whereGu.getString("city"));
-
                     //습도
-                    humidity = Long.toString(Math.round(Double.parseDouble(main_object.getString("humidity"))));
-
-                    //하늘 상태
+                    try {
+                        humidity = Long.toString(Math.round(Double.parseDouble(main_object.getString("humidity"))));
+                    }
+                    catch (Exception e){
+                        humidity = "0";
+                    }
+                        //하늘 상태
                     nowWeather = main_object.getJSONObject("sky").getString("name");
 
                 } catch (JSONException e) {
