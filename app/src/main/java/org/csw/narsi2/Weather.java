@@ -1,105 +1,88 @@
 package org.csw.narsi2;
 
 public class Weather {
-    private static final Weather ourInstance = new Weather();
-    private double temp;
-    private String airPollution;
-    private double humidity;
-    private String whereGu;
-    private double tmin, tmax;
-    private double wspd;
-    private double wctindex;
-    private String nowWeather;
 
-    public static Weather getInstance() {
-        return ourInstance;
+    private String temperature, highestTemp, lowestTemp, pm10value, pm25value, Precipitation, wspd, avgTemperatrue, avgWindspeed, waterType;
+    public void Weather(){}
+
+    public String getTemperature() {
+        return temperature;
     }
 
-    private Weather() {
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
     }
 
-    public void setWeather(String whereGu, String nowWeather, String airPollution, double temp, double tmax, double tmin, double wspd, double wctindex, double humidity) {
-        this.setNowWeather(nowWeather);
-        this.setWctindex(wctindex);
-        this.setWspd(wspd);
-        this.setTmax(tmax);
-        this.setTmin(tmin);
-        this.setAirPollution(airPollution);
-        this.setHumidity(humidity);
-        this.setWhereGu(whereGu);
-        this.setTemp(temp);
+    public String getHighestTemp() {
+        return highestTemp;
     }
 
-    public String getNowWeather() {
-        return nowWeather;
+    public void setHighestTemp(String highestTemp) {
+        this.highestTemp = highestTemp;
     }
 
-    public void setNowWeather(String nowWeather) {
-        this.nowWeather = nowWeather;
+    public String getLowestTemp() {
+        return lowestTemp;
+    }
+
+    public void setLowestTemp(String lowestTemp) {
+        this.lowestTemp = lowestTemp;
+    }
+
+    public String getPm10value() {
+        return pm10value;
+    }
+
+    public void setPm10value(String pm10value) {
+        this.pm10value = pm10value;
+    }
+
+    public String getPm25value() {
+        return pm25value;
+    }
+
+    public void setPm25value(String pm25value) {
+        this.pm25value = pm25value;
     }
 
 
-    public double getTemp() {
-        return temp;
+    public String getPrecipitation() {
+        return Precipitation;
     }
 
-    public void setTemp(double temp) {
-        this.temp = temp;
+    public void setPrecipitation(String precipitation) {
+        Precipitation = precipitation;
     }
 
-    public String getAirPollution() {
-        return airPollution;
-    }
-
-    public void setAirPollution(String airPollution) {
-        this.airPollution = airPollution;
-    }
-
-    public double getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(double humidity) {
-        this.humidity = humidity;
-    }
-
-    public String getWhereGu() {
-        return whereGu;
-    }
-
-    public void setWhereGu(String whereGu) {
-        this.whereGu = whereGu;
-    }
-
-    public double getTmin() {
-        return tmin;
-    }
-
-    public void setTmin(double tmin) {
-        this.tmin = tmin;
-    }
-
-    public double getTmax() {
-        return tmax;
-    }
-
-    public void setTmax(double tmax) {
-        this.tmax = tmax;
-    }
-
-    public double getWspd() {
+    public String getWspd() {
         return wspd;
     }
 
-    public void setWspd(double wspd) {
+    public void setWspd(String wspd) {
         this.wspd = wspd;
     }
 
-    public double getWctindex() {
-        return wctindex;
+    public String getAvgTemperatrue() {
+        return avgTemperatrue;
     }
 
-    public void setWctindex(double wctindex) {
-        this.wctindex = wctindex;
+    public void setAvgTemperatrue(String avgTemperatrue) {
+        this.avgTemperatrue = avgTemperatrue;
+    }
+
+    public String getAvgWindspeed() {
+        return avgWindspeed;
+    }
+
+    public void setAvgWindspeed(String avgWindspeed) {
+        this.avgWindspeed = avgWindspeed;
+    }
+
+    public String getWaterType() {
+        return waterType;
+    }
+
+    public void setWaterType(String waterType) {
+        this.waterType = waterType;
     }
 }
