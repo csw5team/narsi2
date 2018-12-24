@@ -1,8 +1,6 @@
 package org.csw.narsi2;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 
@@ -13,26 +11,29 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Feedback {
+@SuppressWarnings("serial")
+public class Feedback implements Serializable {
     private int tempFeedback ;
     private int styleFeedback;
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    final String uid = user.getUid();
 
     public Feedback() {
     }
 
     public void getTempFeedbackFromDB() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final String uid = user.getUid();
+
+
         DocumentReference docRef = db.collection("user_final").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -72,7 +73,9 @@ public class Feedback {
         this.styleFeedback = styleFeedback;
     }
 
-    public void setDb(int value, int value2) {
+    public void setFeedback(String Uid, int CodiFeedback, int update_temp) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         if (user != null) {
             // Name, email address, and profile photo Url
             //String name = user.getDisplayName();
@@ -87,32 +90,17 @@ public class Feedback {
 
             // 아래에 user1.put("이름", 객체) 순으로 넣으면 firebase DB에 쓰기 가능
 
-            Map<String, Object> user1 = new HashMap<>();
-            user1.put("tempFeed", String.valueOf(value));
+            Map<String, Object> data = new HashMap<>();
+            data.put("codiFeed", String.valueOf(CodiFeedback));
+            data.put("tempFeed",String.valueOf(update_temp));
 
-
-            db.collection("user_final").document(uid)
-                    .set(user1, SetOptions.merge())
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                        }
-                    });
-
-            Map<String, Object> user2 = new HashMap<>();
-            user2.put("codiFeed",String.valueOf(value2));
 
             long now = System.currentTimeMillis();
             Date date = new Date(now);
             String getTimeYMD = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
-            db.collection("user_final").document(uid).collection("codiFeedback").document(getTimeYMD)
-                    .set(user2, SetOptions.merge())
+            db.collection("user_final").document(Uid).collection("Feedback").document(getTimeYMD)
+                    .set(data, SetOptions.merge())
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

@@ -1,6 +1,8 @@
 package org.csw.narsi2;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,16 +11,24 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PreferenceController extends AppCompatActivity {
 
     private ToggleButton button_casual, button_sporty, button_formal, imhot, imcold, idontknow;
+    private boolean isCheck_casual,isCheck_formal,isCheck_sporty,isCheck_hot,isCheck_cold,isCheck_know = false;
     private int CodiStyle = 10;
     private int temp = 10;
-    private Button saveButton;
+    private Button bt_save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,37 +38,20 @@ public class PreferenceController extends AppCompatActivity {
         setbutton();
         setbutton2();
 
+        Intent intent = getIntent();
+        User singleuser = (User) intent.getSerializableExtra("User");
+        final String Uid = FirebaseAuth.getInstance().getUid();
 
-        saveButton = (Button) findViewById(R.id.savebutton);
+        Preference preference = getPreference(Uid);
+        singleuser.addPreference(preference);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        bt_save = (Button) findViewById(R.id.savebutton);
+
+        bt_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setPreference(Uid, CodiStyle, temp);
 
-                if (CodiStyle == 10 || temp == 10) {
-                    Toast.makeText(PreferenceController.this, "모두 선택해주세요", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = getIntent();
-
-
-
-                    Preference preference = new Preference(CodiStyle, temp); //CreatePreference (생성자를 사용)
-                    User singleuser = (User) intent.getSerializableExtra("User");
-                    singleuser.setPreference(preference);
-                    preference.savePreference();
-
-                    Toast.makeText(PreferenceController.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
-
-
-                    Intent intent2 = new Intent(PreferenceController.this, getLatLng.class);
-
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("User", singleuser);
-                    intent2.putExtras(bundle);
-
-                    startActivity(intent2);
-                    finish();
-                }
             }
         });
 
@@ -81,8 +74,9 @@ public class PreferenceController extends AppCompatActivity {
                     CodiStyle = 1;
                     button_formal.setChecked(false);
                     button_sporty.setChecked(false);
+                    isCheck_casual = true;
                 } else {
-                    CodiStyle = 10;
+                    isCheck_casual = false;
                 }
             }
         });
@@ -96,9 +90,11 @@ public class PreferenceController extends AppCompatActivity {
                     CodiStyle = 2;
                     button_casual.setChecked(false);
                     button_formal.setChecked(false);
+                    isCheck_sporty = true;
 
                 } else {
-                    CodiStyle = 10;
+                    isCheck_sporty = false;
+
                 }
             }
         });
@@ -112,9 +108,11 @@ public class PreferenceController extends AppCompatActivity {
                     CodiStyle = 0;
                     button_casual.setChecked(false);
                     button_sporty.setChecked(false);
+                    isCheck_formal = true;
 
                 } else {
-                    CodiStyle = 10;
+                    isCheck_formal = false;
+
                 }
             }
         });
@@ -142,8 +140,9 @@ public class PreferenceController extends AppCompatActivity {
                     temp = 1;
                     imcold.setChecked(false);
                     idontknow.setChecked(false);
+                    isCheck_hot = true;
                 } else {
-                    temp = 10;
+                    isCheck_hot = false;
                 }
             }
         });
@@ -154,9 +153,9 @@ public class PreferenceController extends AppCompatActivity {
                     temp = -1;
                     imhot.setChecked(false);
                     idontknow.setChecked(false);
+                    isCheck_cold = true;
                 } else {
-                    temp = 10;
-
+                    isCheck_cold = false;
                 }
             }
         });
@@ -167,19 +166,90 @@ public class PreferenceController extends AppCompatActivity {
                     temp = 0;
                     imhot.setChecked(false);
                     imcold.setChecked(false);
+                    isCheck_know = true;
                 } else {
-                    temp = 10;
-
+                    isCheck_know = false;
                 }
             }
         });
     }
 
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    public void setPreference(String Uid, int CodiStyle, int temp) {
+        if (!((isCheck_casual||isCheck_formal||isCheck_sporty)&&(isCheck_cold||isCheck_hot||isCheck_know))) {
+            Toast.makeText(PreferenceController.this, "모두 선택해주세요", Toast.LENGTH_SHORT).show();
+        } else {
 
-        finish();
+            Intent intent = getIntent();
+
+            Preference preference = new Preference(CodiStyle, temp); //CreatePreference (생성자를 사용)
+            User singleuser = (User) intent.getSerializableExtra("User");
+            singleuser.addPreference(preference);
+            singleuser.getPreference().savePreference(Uid);
+
+            Toast.makeText(PreferenceController.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
+
+
+            Intent intent2 = new Intent(PreferenceController.this, getLatLng.class);
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("User", singleuser);
+            intent2.putExtras(bundle);
+
+            startActivity(intent2);
+            finish();
+        }
+    }
+
+    public Preference getPreference(String Uid) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("user_final").document(Uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.getString("tempFeed") != null) {
+
+                        temp = Integer.valueOf(document.getString("tempFeed"));
+                        if (temp > 0) {
+                            imhot.setChecked(true);
+                        } else if (temp < 0) {
+                            imcold.setChecked(true);
+                        } else if (temp == 0) {
+                            idontknow.setChecked(true);
+                        }
+                    }
+                } else {
+
+                }
+            }
+        });
+
+        DocumentReference docRef2 = db.collection("user_final").document(Uid);
+        docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.getString("codiPref") != null) {
+                        CodiStyle = Integer.valueOf(document.getString("codiPref"));
+                        if (CodiStyle == 0) {
+                            button_formal.setChecked(true);
+                        } else if (CodiStyle == 1) {
+                            button_casual.setChecked(true);
+                        } else if (CodiStyle == 2) {
+                            button_sporty.setChecked(true);
+                        }
+                    }
+                } else {
+
+                }
+            }
+        });
+
+        Preference preference = new Preference(CodiStyle, temp);
+        return preference;
+
     }
 }

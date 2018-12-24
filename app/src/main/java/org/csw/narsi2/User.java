@@ -7,10 +7,20 @@ public class User implements Serializable {
 
     private int age;
     private int gender;
+    private String name;
     private String userID;
 
-    private Feedback feedback;
-    private Preference preference;
+    private Feedback feedback = new Feedback();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private Preference preference = new Preference();
 
     public User() {
     }
@@ -49,10 +59,14 @@ public class User implements Serializable {
     }
 
     public Preference getPreference() {
-        return preference;
+        if (preference != null) {
+            return preference;
+        } else {
+            return null;
+        }
     }
 
-    public void setPreference(Preference preference) {
+    public void addPreference(Preference preference) {
         this.preference = preference;
     }
 
