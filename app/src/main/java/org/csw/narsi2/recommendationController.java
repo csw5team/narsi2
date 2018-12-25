@@ -985,12 +985,17 @@ public class recommendationController extends Fragment {
                     topMapWeighted2.put(elem.getKey(), topMapWeighted.get(elem.getKey()));
                 }
             }
+            else if(singleuser.getGender().equals("여")){
+                topMapWeighted2 = topMapWeighted;
+            }
         }
         for (Map.Entry<String, Bottom> elem : bottomMapWeighted.entrySet()) {
             if (singleuser.getGender().equals("남")) {
                 if (!elem.getValue().getSex().equals("2")) {
                     bottomMapWeighted2.put(elem.getKey(), bottomMapWeighted.get(elem.getKey()));
                 }
+            }else if(singleuser.getGender().equals("여")){
+                bottomMapWeighted2 = bottomMapWeighted;
             }
         }
     }
