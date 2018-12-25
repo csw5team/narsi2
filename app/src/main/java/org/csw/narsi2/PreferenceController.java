@@ -137,7 +137,7 @@ public class PreferenceController extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    temp = 1;
+                    temp = 3;
                     imcold.setChecked(false);
                     idontknow.setChecked(false);
                     isCheck_hot = true;
@@ -150,7 +150,7 @@ public class PreferenceController extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    temp = -1;
+                    temp = -3;
                     imhot.setChecked(false);
                     idontknow.setChecked(false);
                     isCheck_cold = true;
