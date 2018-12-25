@@ -16,9 +16,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d187d317-a29b-47af-9f90-333bfd583027" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Bottom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Others.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Top.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -28,13 +25,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Codi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Codi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/DBcheck.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/loginActivity/loginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/loginActivity/loginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_dbcheck.xml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,18 +52,42 @@
       <file leaf-file-name="recommendationController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="629" column="37" lean-forward="true" selection-start-line="617" selection-start-column="36" selection-end-line="629" selection-end-column="37" />
+            <state relative-caret-position="542">
+              <caret line="726" column="33" lean-forward="true" selection-start-line="726" selection-end-line="727" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#22385#25948#0" expanded="true" />
-                <element signature="e#22806#25920#0" expanded="true" />
-                <element signature="e#25503#25754#0" expanded="true" />
-                <element signature="e#25753#25754#0" expanded="true" />
-                <element signature="e#25919#25920#0" expanded="true" />
-                <element signature="e#25947#25948#0" expanded="true" />
-                <element signature="e#30019#30251#0" expanded="true" />
-                <element signature="e#30250#30251#0" expanded="true" />
+                <element signature="e#6984#7126#0" expanded="true" />
+                <element signature="e#7125#7126#0" expanded="true" />
+                <element signature="e#7166#7311#0" expanded="true" />
+                <element signature="e#7310#7311#0" expanded="true" />
+                <element signature="e#7460#7600#0" expanded="true" />
+                <element signature="e#7599#7600#0" expanded="true" />
+                <element signature="e#8686#9167#0" expanded="true" />
+                <element signature="e#9166#9167#0" expanded="true" />
+                <element signature="e#10370#12623#0" expanded="true" />
+                <element signature="e#12622#12623#0" expanded="true" />
+                <element signature="e#13000#14868#0" expanded="true" />
+                <element signature="e#14867#14868#0" expanded="true" />
+                <element signature="e#15250#16734#0" expanded="true" />
+                <element signature="e#16733#16734#0" expanded="true" />
+                <element signature="e#17358#18272#0" expanded="true" />
+                <element signature="e#18271#18272#0" expanded="true" />
+                <element signature="e#21913#22447#0" expanded="true" />
+                <element signature="e#22446#22447#0" expanded="true" />
+                <element signature="e#22574#23049#0" expanded="true" />
+                <element signature="e#23048#23049#0" expanded="true" />
+                <element signature="e#23141#27498#0" expanded="true" />
+                <element signature="e#23562#27470#0" expanded="true" />
+                <element signature="e#27469#27470#0" expanded="true" />
+                <element signature="e#27497#27498#0" expanded="true" />
+                <element signature="e#28077#30537#0" expanded="true" />
+                <element signature="e#29089#30488#0" expanded="true" />
+                <element signature="e#30487#30488#0" expanded="true" />
+                <element signature="e#30536#30537#0" expanded="true" />
+                <element signature="e#30697#32481#0" expanded="true" />
+                <element signature="e#32480#32481#0" expanded="true" />
+                <element signature="e#32586#34346#0" expanded="true" />
+                <element signature="e#34345#34346#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -159,6 +175,24 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="PreferenceController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Preference.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Preference.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-69">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FeedbackController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/FeedbackController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -182,36 +216,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clothes_top</find>
-      <find>비가</find>
-      <find>iv_oth</find>
-      <find>others</find>
-      <find>&gt; 80</find>
-      <find>Codi</find>
-      <find>display()</find>
-      <find>View.Gone</find>
-      <find>getFeedback</find>
-      <find>feed_1</find>
-      <find>CodiPref</find>
-      <find>CodiStyle</find>
-      <find>highestTemp</find>
-      <find>high</find>
-      <find>highesttemp</find>
-      <find>hige</find>
-      <find>higest</find>
-      <find>casualWeight</find>
-      <find>gender</find>
-      <find>eight</find>
-      <find>se</find>
-      <find>analysisFeedback</find>
+      <find>targetStyle</find>
+      <find>selectbo</find>
+      <find>maploop</find>
+      <find>sex</find>
+      <find>selectBottom</find>
+      <find>bottomMap.put</find>
       <find>display2</find>
+      <find>setbottom</find>
+      <find>iv_top</find>
+      <find>Runnable</find>
+      <find>temperature</find>
+      <find>getOp</find>
+      <find>bottom</find>
+      <find>selected</find>
+      <find>bottomMap</find>
+      <find>b</find>
+      <find>bottomMapsize</find>
+      <find>p</find>
+      <find>getop</find>
       <find>pm10value</find>
+      <find>28</find>
+      <find>savePreference</find>
+      <find>setPreference</find>
+      <find>temp</find>
+      <find>UserTemp</find>
       <find>type4</find>
-      <find>nowWeather</find>
-      <find>비가 와요</find>
-      <find>nowWea</find>
-      <find>//</find>
-      <find>selecttop</find>
+      <find>city</find>
+      <find>find_ai</find>
+      <find>find_air</find>
+      <find>runnable</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2505,7 +2539,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_codi.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Preference.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/getLatLng.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/FeedbackController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Feedback.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/layout_bg.xml" />
@@ -2520,6 +2553,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Codi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/loginActivity/loginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/User.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" />
       </list>
     </option>
@@ -2571,18 +2605,6 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
             </path>
-            <path>
-              <item name="narsi2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="narsi2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -2591,7 +2613,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="ce011601fbe19b1f05" />
+    <property name="device.picker.selection" value="Nexus_5X_API_28" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="instant.run" />
@@ -2731,7 +2753,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545674671809</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="main scenario implementation">
+      <created>1545732493749</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1545732493749</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2752,14 +2781,14 @@
       <window_info id="Captures" order="7" weight="0.25" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="0" />
-      <window_info content_ui="combo" id="Project" order="4" visible="true" weight="0.18763326" />
-      <window_info anchor="bottom" id="Build" order="0" weight="0.32952926" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.18763326" />
+      <window_info anchor="bottom" id="Build" order="0" weight="0.3293348" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3293348" />
       <window_info anchor="right" id="Gradle" order="3" />
       <window_info id="Structure" order="5" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="2" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info active="true" anchor="bottom" id="Debug" order="9" visible="true" weight="0.3991276" />
+      <window_info anchor="bottom" id="Debug" order="9" visible="true" weight="0.2944384" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" order="5" weight="0.4" />
@@ -3062,20 +3091,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Preference.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="227" selection-start-line="227" selection-end-line="227" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Weather.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -3144,17 +3159,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Codi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-          <folding>
-            <element signature="e#348#349#0" expanded="true" />
-            <element signature="e#384#385#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -3188,20 +3192,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Codi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+          <folding>
+            <element signature="e#348#349#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Preference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-69">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
-          <caret line="629" column="37" lean-forward="true" selection-start-line="617" selection-start-column="36" selection-end-line="629" selection-end-column="37" />
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="726" column="33" lean-forward="true" selection-start-line="726" selection-end-line="727" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#22385#25948#0" expanded="true" />
-            <element signature="e#22806#25920#0" expanded="true" />
-            <element signature="e#25503#25754#0" expanded="true" />
-            <element signature="e#25753#25754#0" expanded="true" />
-            <element signature="e#25919#25920#0" expanded="true" />
-            <element signature="e#25947#25948#0" expanded="true" />
-            <element signature="e#30019#30251#0" expanded="true" />
-            <element signature="e#30250#30251#0" expanded="true" />
+            <element signature="e#6984#7126#0" expanded="true" />
+            <element signature="e#7125#7126#0" expanded="true" />
+            <element signature="e#7166#7311#0" expanded="true" />
+            <element signature="e#7310#7311#0" expanded="true" />
+            <element signature="e#7460#7600#0" expanded="true" />
+            <element signature="e#7599#7600#0" expanded="true" />
+            <element signature="e#8686#9167#0" expanded="true" />
+            <element signature="e#9166#9167#0" expanded="true" />
+            <element signature="e#10370#12623#0" expanded="true" />
+            <element signature="e#12622#12623#0" expanded="true" />
+            <element signature="e#13000#14868#0" expanded="true" />
+            <element signature="e#14867#14868#0" expanded="true" />
+            <element signature="e#15250#16734#0" expanded="true" />
+            <element signature="e#16733#16734#0" expanded="true" />
+            <element signature="e#17358#18272#0" expanded="true" />
+            <element signature="e#18271#18272#0" expanded="true" />
+            <element signature="e#21913#22447#0" expanded="true" />
+            <element signature="e#22446#22447#0" expanded="true" />
+            <element signature="e#22574#23049#0" expanded="true" />
+            <element signature="e#23048#23049#0" expanded="true" />
+            <element signature="e#23141#27498#0" expanded="true" />
+            <element signature="e#23562#27470#0" expanded="true" />
+            <element signature="e#27469#27470#0" expanded="true" />
+            <element signature="e#27497#27498#0" expanded="true" />
+            <element signature="e#28077#30537#0" expanded="true" />
+            <element signature="e#29089#30488#0" expanded="true" />
+            <element signature="e#30487#30488#0" expanded="true" />
+            <element signature="e#30536#30537#0" expanded="true" />
+            <element signature="e#30697#32481#0" expanded="true" />
+            <element signature="e#32480#32481#0" expanded="true" />
+            <element signature="e#32586#34346#0" expanded="true" />
+            <element signature="e#34345#34346#0" expanded="true" />
           </folding>
         </state>
       </provider>

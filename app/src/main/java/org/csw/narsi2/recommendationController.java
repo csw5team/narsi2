@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,6 +51,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 /**
@@ -74,7 +77,12 @@ public class recommendationController extends Fragment {
     private String wspd4hour, wspd7hour, wspd10hour, wspd13hour;
     private String type4hour, type7hour, type10hour, type13hour;
     private String temp4hour, temp7hour, temp10hour, temp13hour;
-    private int feed_21, feed_14, feed_7, feed_3, feed_2, feed_1 = -1;
+    private int feed_21 = -1;
+    private int feed_14 = -1;
+    private int feed_7 = -1;
+    private int feed_3 = -1;
+    private int feed_2 = -1;
+    private int feed_1 = -1;
     private Weather weather = new Weather();
 
 
@@ -95,6 +103,7 @@ public class recommendationController extends Fragment {
     private ImageView iv_left, iv_right;
     private ImageView iv_mimiroom;
     private String CodiStyle, preferTemp;
+    private String targetStyle = "-1";
     private int feedbackSum = 0;
     private int recommendCodi_byFeedback;
     private String avgwspd, avgTemp;
@@ -103,6 +112,8 @@ public class recommendationController extends Fragment {
     private HashMap<String, Bottom> bottomMap = new HashMap<>();
     private HashMap<String, Top> topMapWeighted = new HashMap<>();
     private HashMap<String, Bottom> bottomMapWeighted = new HashMap<>();
+    private HashMap<String, Top> topMapWeighted2 = new HashMap<>();
+    private HashMap<String, Bottom> bottomMapWeighted2 = new HashMap<>();
     private Others others_mask, others_umbrella;
     private Codi recommendCodi;
     private int formalWeight, casualWeight, sportyWeight = 0;
@@ -166,6 +177,18 @@ public class recommendationController extends Fragment {
         iv_umbrella = (ImageView) rootView.findViewById(R.id.imageView_umbrella);
         iv_mask = (ImageView) rootView.findViewById(R.id.imageView_mask);
 
+        iv_top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTop();
+            }
+        });
+        iv_bottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setBottom();
+            }
+        });
 
         Intent i = getActivity().getIntent();
 
@@ -202,11 +225,14 @@ public class recommendationController extends Fragment {
             @Override
             public void run() {
                 apiKey2 = "k4EQ4%2F5OWx0mMD0gkif7DSIBL4Wr2atojsRiHmY21vl1FcPsUIUusSXeL1xyVGcNAmciyWc3OUQmgmqaH1kPlg%3D%3D";
+                if(city==null){
+                    city = "서울";
+                }
                 targetURL2 = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=" + city + "&pageNo=1&numOfRows=1&ServiceKey=" + apiKey2 + "&ver=1.3&_returnType=json";
                 find_airPollution();
 
             }
-        }, 1000);
+        }, 500);
 
 
         return rootView;
@@ -582,22 +608,33 @@ public class recommendationController extends Fragment {
                                             Log.d("diffdays", String.valueOf(diffdays));
 
                                             if (diffdays == 21) {
-                                                feed_21 = Integer.parseInt(document.getString("codiFeed"));
+                                                if (document.getString("codiFeed") != null)
+                                                    feed_21 = Integer.parseInt(document.getString("codiFeed"));
 
                                             } else if (diffdays == 14) {
-                                                feed_14 = Integer.parseInt(document.getString("codiFeed"));
+                                                if (document.getString("codiFeed") != null)
+
+                                                    feed_14 = Integer.parseInt(document.getString("codiFeed"));
 
                                             } else if (diffdays == 7) {
-                                                feed_7 = Integer.parseInt(document.getString("codiFeed"));
+                                                if (document.getString("codiFeed") != null)
+
+                                                    feed_7 = Integer.parseInt(document.getString("codiFeed"));
 
                                             } else if (diffdays == 3) {
+                                                if (document.getString("codiFeed") != null)
+                                                    Log.d("value", document.getString("codiFeed"));
                                                 feed_3 = Integer.parseInt(document.getString("codiFeed"));
 
                                             } else if (diffdays == 2) {
-                                                feed_2 = Integer.parseInt(document.getString("codiFeed"));
+                                                if (document.getString("codiFeed") != null)
+
+                                                    feed_2 = Integer.parseInt(document.getString("codiFeed"));
 
                                             } else if (diffdays == 1) {
-                                                feed_1 = Integer.parseInt(document.getString("codiFeed"));
+                                                if (document.getString("codiFeed") != null)
+
+                                                    feed_1 = Integer.parseInt(document.getString("codiFeed"));
 
                                             }
 
@@ -605,29 +642,17 @@ public class recommendationController extends Fragment {
                                             Toast.makeText(getContext(), "피드백 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
                                         }
                                     }
+                                    Log.d("feed_1", String.valueOf(feed_1));
+                                    Log.d("feed_2", String.valueOf(feed_2));
+                                    Log.d("feed_3", String.valueOf(feed_3));
+                                    Log.d("feed_7", String.valueOf(feed_7));
+                                    Log.d("feed_14", String.valueOf(feed_14));
+                                    Log.d("feed_21", String.valueOf(feed_21));
+
                                     analysisFeedback();
                                     Log.d("casualweight", String.valueOf(casualWeight));
                                     Log.d("formalWeight", String.valueOf(formalWeight));
                                     Log.d("sportyWeight", String.valueOf(sportyWeight));
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-                                        }
-                                    },500);
-                                    if (Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp) > 10) {
-                                        selectOuter();
-                                    }
-                                    Log.d("temp_diff",String.valueOf(Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp)));
-                                    selectTop();
-                                    selectBottom();
-                                    checkSex();
-                                    for(Map.Entry<String,Top> elem : topMapWeighted.entrySet()){
-                                        Log.d("selected top",elem.getKey());
-                                    }
-                                    for(Map.Entry<String,Bottom> elem : bottomMapWeighted.entrySet()){
-                                        Log.d("selected top",elem.getKey());
-                                    }
                                 } else {
 
                                 }
@@ -666,7 +691,41 @@ public class recommendationController extends Fragment {
                         UserTemp = String.valueOf((int) (tempTemp + Double.parseDouble(preferTemp)));
 
                         Log.d("UserTemp : ", UserTemp);
+
                         getOptimums(UserTemp);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                if (Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp) > 10) {
+                                    selectOuter();
+                                }
+                                Log.d("temp_diff", String.valueOf(Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp)));
+                                selectTop();
+                                selectBottom();
+                                checkSex();
+
+                                for (Map.Entry<String, Top> elem : topMapWeighted2.entrySet()) {
+                                    Log.d("selected top", elem.getKey());
+                                }
+                                for (Map.Entry<String, Bottom> elem : bottomMapWeighted2.entrySet()) {
+                                    Log.d("selected top", elem.getKey());
+                                }
+
+                                Log.d("topmapweighted", String.valueOf(topMapWeighted2.size()));
+                                Log.d("bottommapweighted", String.valueOf(bottomMapWeighted2.size()));
+
+                                display();
+                                display2();
+
+
+                                layout_waiting.setVisibility(View.GONE);
+
+
+                            }
+                        }, 1000);
+
                     }
                 });
 
@@ -698,6 +757,7 @@ public class recommendationController extends Fragment {
                                 }
 
                             }
+                            Log.d("topMapsize", String.valueOf(topMap.size()));
                         } else {
                         }
                     }
@@ -724,28 +784,12 @@ public class recommendationController extends Fragment {
                                     }
                                 }
 
-                            }
+                            }Log.d("bottomMapsize",String.valueOf(bottomMap.size()));
                         } else {
                         }
                     }
                 });
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for (Map.Entry<String, Top> elem : topMap.entrySet()) {
-                    Log.d("ID : ", elem.getKey());
-                }
-                for (Map.Entry<String, Bottom> elem : bottomMap.entrySet()) {
-                    Log.d("ID : ", elem.getKey());
-                }
-
-                display();
-                display2();
-                layout_waiting.setVisibility(View.GONE);
-
-            }
-        }, 300);
 
     }
 
@@ -764,6 +808,8 @@ public class recommendationController extends Fragment {
             iv_umbrella.setVisibility(View.GONE);
         }
 
+        setTop();
+        setBottom();
 
     }
 
@@ -869,7 +915,6 @@ public class recommendationController extends Fragment {
 
     public void selectTop() {
         int targetMax = Math.max(casualWeight, Math.max(formalWeight, sportyWeight));
-        String targetStyle = "-1";
         if (targetMax == formalWeight) {
             targetStyle = "0";
         } else if (targetMax == casualWeight) {
@@ -877,13 +922,16 @@ public class recommendationController extends Fragment {
         } else if (targetMax == sportyWeight) {
             targetStyle = "2";
         }
+        while (targetStyle.equals("-1")) ;
 
-        Log.d("targetStyle",targetStyle);
+        Log.d("targetStyle", targetStyle);
+
         for (Map.Entry<String, Top> elem : topMap.entrySet()) {
+            Log.d("maploop", "processing");
             if (targetStyle.equals("0")) {
                 if (elem.getValue().getFormal().equals("1")) {
                     topMapWeighted.put(elem.getKey(), topMap.get(elem.getKey()));
-                    Log.d("processing",elem.getKey());
+                    Log.d("processing", elem.getKey());
                 }
             } else if (targetStyle.equals("1")) {
                 if (elem.getValue().getCasual().equals("1")) {
@@ -900,17 +948,11 @@ public class recommendationController extends Fragment {
     }
 
     public void selectBottom() {
-        int targetMax = Math.max(casualWeight, Math.max(formalWeight, sportyWeight));
-        String targetStyle = "-1";
-        if (targetMax == formalWeight) {
-            targetStyle = "0";
-        } else if (targetMax == casualWeight) {
-            targetStyle = "1";
-        } else if (targetMax == sportyWeight) {
-            targetStyle = "2";
-        }
+        Log.d("selectBottom", "processing");
 
+        while (targetStyle.equals("-1")) ;
         for (Map.Entry<String, Bottom> elem : bottomMap.entrySet()) {
+            Log.d("maploop", "processing");
             if (targetStyle.equals("0")) {
                 if (elem.getValue().getFormal().equals("1")) {
                     bottomMapWeighted.put(elem.getKey(), bottomMap.get(elem.getKey()));
@@ -936,19 +978,56 @@ public class recommendationController extends Fragment {
     }
 
     public void checkSex() {
+        Log.d("checkSex", "processing");
         for (Map.Entry<String, Top> elem : topMapWeighted.entrySet()) {
             if (singleuser.getGender().equals("남")) {
-                if (elem.getValue().getSex().equals("2")) {
-                    topMapWeighted.remove(elem.getKey());
+                if (!elem.getValue().getSex().equals("2")) {
+                    topMapWeighted2.put(elem.getKey(), topMapWeighted.get(elem.getKey()));
                 }
             }
         }
         for (Map.Entry<String, Bottom> elem : bottomMapWeighted.entrySet()) {
             if (singleuser.getGender().equals("남")) {
-                if (elem.getValue().getSex().equals("2")) {
-                    bottomMapWeighted.remove(elem.getKey());
+                if (!elem.getValue().getSex().equals("2")) {
+                    bottomMapWeighted2.put(elem.getKey(), bottomMapWeighted.get(elem.getKey()));
                 }
             }
+        }
+    }
+
+    public void setTop() {
+        try {
+            Random random = new Random();
+            int index = random.nextInt(topMapWeighted2.size());
+            List keys = new ArrayList<>(topMapWeighted2.keySet());
+            String key = keys.get(index).toString();
+
+            Resources res = getResources();
+            String mDrawableName = key;
+            int resID = res.getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
+            Drawable drawable = res.getDrawable(resID);
+            iv_top.setImageDrawable(drawable);
+        }catch
+                (Exception e){
+            Toast.makeText(getContext(), "의류 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void setBottom() {
+        try {
+            Random random2 = new Random();
+            int index2 = random2.nextInt(bottomMapWeighted2.size());
+            List keys2 = new ArrayList<>(bottomMapWeighted2.keySet());
+            String key2 = keys2.get(index2).toString();
+
+            Resources res2 = getResources();
+            String mDrawableName2 = key2;
+            int resID2 = res2.getIdentifier(mDrawableName2, "drawable", getContext().getPackageName());
+            Drawable drawable2 = res2.getDrawable(resID2);
+            iv_bottom.setImageDrawable(drawable2);
+        }
+        catch(Exception e){
+            Toast.makeText(getContext(), "의류 정보를 불러올 수 없습니다", Toast.LENGTH_SHORT).show();
         }
     }
 }
