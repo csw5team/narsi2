@@ -178,6 +178,8 @@ public class loginActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             String name = "";
+                            String gender = document.getString("sex");
+                            singleUser.setGender(gender);
                             name = document.getString("UserName");
                             if (name != null) {
                                 if (!name.equals("")) {
