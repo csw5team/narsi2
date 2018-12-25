@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     private int age;
-    private int gender;
+    private String gender;
     private String name;
     private String userID;
 
@@ -38,11 +38,11 @@ public class User implements Serializable {
         this.age = age;
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

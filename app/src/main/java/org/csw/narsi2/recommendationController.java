@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -68,16 +69,17 @@ public class recommendationController extends Fragment {
     private ProgressBar progressBar;
     private ConstraintLayout layout_waiting, first, second;
 
-    private String temperature, city, gu, humidity, nowWeather, airPollution, higestTemp, lowestTemp, wspd, wctIndex, type, precipitation;
+    private String temperature, city, gu, humidity, nowWeather, airPollution, highestTemp, lowestTemp, wspd, wctIndex, type, precipitation;
     private String pm10Value, pm25Value;
     private String wspd4hour, wspd7hour, wspd10hour, wspd13hour;
     private String type4hour, type7hour, type10hour, type13hour;
     private String temp4hour, temp7hour, temp10hour, temp13hour;
-    private int feed_21, feed_14, feed_7, feed_3, feed_2, feed_1;
+    private int feed_21, feed_14, feed_7, feed_3, feed_2, feed_1 = -1;
     private Weather weather = new Weather();
 
 
     private TextView tv_info, tv_weather, tv_others;
+    private ImageView iv_top, iv_bottom, iv_umbrella, iv_mask;
     private String Uid;
     private double lat, lng;
     private ImageView iv_dialog;
@@ -97,9 +99,13 @@ public class recommendationController extends Fragment {
     private int recommendCodi_byFeedback;
     private String avgwspd, avgTemp;
     private String UserTemp;
-    private HashMap<String, Clothes> topMap = new HashMap<>();
-    private HashMap<String, Clothes> bottomMap = new HashMap<>();
-
+    private HashMap<String, Top> topMap = new HashMap<>();
+    private HashMap<String, Bottom> bottomMap = new HashMap<>();
+    private HashMap<String, Top> topMapWeighted = new HashMap<>();
+    private HashMap<String, Bottom> bottomMapWeighted = new HashMap<>();
+    private Others others_mask, others_umbrella;
+    private Codi recommendCodi;
+    private int formalWeight, casualWeight, sportyWeight = 0;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -155,6 +161,12 @@ public class recommendationController extends Fragment {
         tv_info = (TextView) rootView.findViewById(R.id.textView4);
         tv_others = (TextView) rootView.findViewById(R.id.textView6);
 
+        iv_top = (ImageView) rootView.findViewById(R.id.imageView_top);
+        iv_bottom = (ImageView) rootView.findViewById(R.id.imageView_bottom);
+        iv_umbrella = (ImageView) rootView.findViewById(R.id.imageView_umbrella);
+        iv_mask = (ImageView) rootView.findViewById(R.id.imageView_mask);
+
+
         Intent i = getActivity().getIntent();
 
         singleuser = (User) i.getSerializableExtra("User");
@@ -165,7 +177,6 @@ public class recommendationController extends Fragment {
                 show();
             }
         });
-
 
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         layout_waiting = (ConstraintLayout) rootView.findViewById(R.id.layout_waiting);
@@ -251,7 +262,7 @@ public class recommendationController extends Fragment {
                         long tempCurrentRound = Math.round(Double.parseDouble(tempCurrent));
                         temperature = Long.toString(tempCurrentRound);
                         long tmaxRound = Math.round(Double.parseDouble(temp.getString("tmax")));
-                        higestTemp = Long.toString(tmaxRound);
+                        highestTemp = Long.toString(tmaxRound);
                         long tminRound = Math.round(Double.parseDouble(temp.getString("tmin")));
                         lowestTemp = Long.toString(tminRound);
 
@@ -272,6 +283,7 @@ public class recommendationController extends Fragment {
                         humidity = Long.toString(Math.round(Double.parseDouble(main_object.getString("humidity"))));
 
                         nowWeather = main_object.getJSONObject("sky").getString("name");
+
 
                     } catch (Exception e) {
                         Toast.makeText(getContext(), "날씨 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -353,11 +365,10 @@ public class recommendationController extends Fragment {
                     pm25Value = main_object.getString("pm25Value");
 
 
-                    display();
                     weather.setTemperature(temperature);
                     weather.setPm10value(pm10Value);
                     weather.setPm25value(pm25Value);
-                    weather.setHighestTemp(higestTemp);
+                    weather.setHighestTemp(highestTemp);
                     weather.setLowestTemp(lowestTemp);
                     weather.setWspd(wspd);
                     weather.setPrecipitation(precipitation);
@@ -367,13 +378,11 @@ public class recommendationController extends Fragment {
                     weather.setAvgTemperatrue(avgTemp);
 
 
-                    avgwspd = String.valueOf(Double.parseDouble(wspd4hour) + Double.parseDouble(wspd7hour) + Double.parseDouble(wspd10hour) + Double.parseDouble(wspd13hour) / 4.0);
+                    avgwspd = String.valueOf((Double.parseDouble(wspd4hour) + Double.parseDouble(wspd7hour) + Double.parseDouble(wspd10hour) + Double.parseDouble(wspd13hour)) / 4.0);
                     weather.setAvgWindspeed(avgwspd);
 
                     getFeedback(Uid);
                     calculateTemp(Uid);
-
-                    layout_waiting.setVisibility(View.GONE);
 
 
                 } catch (JSONException e) {
@@ -570,7 +579,7 @@ public class recommendationController extends Fragment {
                                             Date date2 = transFormat.parse(targetDate);
                                             long diff = date.getTime() - date2.getTime();
                                             long diffdays = diff / (24 * 60 * 60 * 1000);
-                                            Log.d("diffdays",String.valueOf(diffdays));
+                                            Log.d("diffdays", String.valueOf(diffdays));
 
                                             if (diffdays == 21) {
                                                 feed_21 = Integer.parseInt(document.getString("codiFeed"));
@@ -593,8 +602,31 @@ public class recommendationController extends Fragment {
                                             }
 
                                         } catch (Exception e) {
-                                            Toast.makeText(getContext(),"피드백 정보를 불러올 수 없습니다.",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "피드백 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
                                         }
+                                    }
+                                    analysisFeedback();
+                                    Log.d("casualweight", String.valueOf(casualWeight));
+                                    Log.d("formalWeight", String.valueOf(formalWeight));
+                                    Log.d("sportyWeight", String.valueOf(sportyWeight));
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                        }
+                                    },500);
+                                    if (Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp) > 10) {
+                                        selectOuter();
+                                    }
+                                    Log.d("temp_diff",String.valueOf(Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp)));
+                                    selectTop();
+                                    selectBottom();
+                                    checkSex();
+                                    for(Map.Entry<String,Top> elem : topMapWeighted.entrySet()){
+                                        Log.d("selected top",elem.getKey());
+                                    }
+                                    for(Map.Entry<String,Bottom> elem : bottomMapWeighted.entrySet()){
+                                        Log.d("selected top",elem.getKey());
                                     }
                                 } else {
 
@@ -609,7 +641,7 @@ public class recommendationController extends Fragment {
 
     public void calculateTemp(String Uid) {
 
-        final long tempTemp = Math.round((13.12 + 0.6215 * Double.parseDouble(temperature) - 11.37 * Math.pow((Double.parseDouble(avgwspd) * 3.6),0.16) + 0.3965 * Math.pow((Double.parseDouble(avgwspd) * 3.6),0.16) * Double.parseDouble(avgTemp))*100)/100;
+        final long tempTemp = Math.round((13.12 + 0.6215 * Double.parseDouble(temperature) - 11.37 * Math.pow((Double.parseDouble(avgwspd) * 3.6), 0.16) + 0.3965 * Math.pow((Double.parseDouble(avgwspd) * 3.6), 0.16) * Double.parseDouble(avgTemp)) * 100) / 100;
 
         Log.d("avgwspd", avgwspd);
         Log.d("avgtemp", avgTemp);
@@ -631,7 +663,7 @@ public class recommendationController extends Fragment {
                         Log.d("feedbacksum", String.valueOf(feedbackSum));
 
                         preferTemp = String.valueOf((Integer.parseInt(preferTemp) + feedbackSum));
-                        UserTemp = String.valueOf((int)(tempTemp + Double.parseDouble(preferTemp)));
+                        UserTemp = String.valueOf((int) (tempTemp + Double.parseDouble(preferTemp)));
 
                         Log.d("UserTemp : ", UserTemp);
                         getOptimums(UserTemp);
@@ -649,7 +681,7 @@ public class recommendationController extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Clothes clothes_top = document.toObject(Clothes.class);
+                                Top clothes_top = document.toObject(Top.class);
                                 if (!clothes_top.getTemp().get(0).equals("") && clothes_top.getTemp().get(1).equals("")) {
                                     if (Integer.parseInt(clothes_top.getTemp().get(0)) <= Integer.parseInt(temp)) {
                                         topMap.put(document.getId(), clothes_top);
@@ -677,7 +709,7 @@ public class recommendationController extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Clothes clothes_bottom = document.toObject(Clothes.class);
+                                Bottom clothes_bottom = document.toObject(Bottom.class);
                                 if (!clothes_bottom.getTemp().get(0).equals("") && clothes_bottom.getTemp().get(1).equals("")) {
                                     if (Integer.parseInt(clothes_bottom.getTemp().get(0)) <= Integer.parseInt(temp)) {
                                         bottomMap.put(document.getId(), clothes_bottom);
@@ -697,6 +729,226 @@ public class recommendationController extends Fragment {
                         }
                     }
                 });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (Map.Entry<String, Top> elem : topMap.entrySet()) {
+                    Log.d("ID : ", elem.getKey());
+                }
+                for (Map.Entry<String, Bottom> elem : bottomMap.entrySet()) {
+                    Log.d("ID : ", elem.getKey());
+                }
+
+                display();
+                display2();
+                layout_waiting.setVisibility(View.GONE);
+
+            }
+        }, 300);
+
     }
 
+    public void display2() {
+        if (Integer.parseInt(pm10Value) > 80 || Integer.parseInt(pm25Value) > 35) {
+            others_mask = new Others("mask");
+            iv_mask.setImageResource(R.drawable.mask);
+        } else {
+            iv_mask.setVisibility(View.GONE);
+        }
+
+        if (!type4hour.equals("0") || !type7hour.equals("0") || !type10hour.equals("0") || !type13hour.equals("0") || !type.equals("0")) {
+            others_umbrella = new Others("umbrella");
+            iv_umbrella.setImageResource(R.drawable.umbrella);
+        } else {
+            iv_umbrella.setVisibility(View.GONE);
+        }
+
+
+    }
+
+    public void analysisFeedback() {
+
+        if (feed_1 == 0) {
+            formalWeight += 3;
+        } else if (feed_1 == 1) {
+            casualWeight += 3;
+        } else if (feed_1 == 2) {
+            sportyWeight += 3;
+        } else if (feed_1 == -1) {
+            if (CodiStyle.equals("0")) {
+                formalWeight += 3;
+            } else if (CodiStyle.equals("1")) {
+                casualWeight += 3;
+            } else if (CodiStyle.equals("2")) {
+                sportyWeight += 3;
+            }
+        }
+
+        if (feed_2 == 0) {
+            formalWeight += 2;
+        } else if (feed_2 == 1) {
+            casualWeight += 2;
+        } else if (feed_2 == 2) {
+            sportyWeight += 2;
+        } else if (feed_2 == -1) {
+            if (CodiStyle.equals("0")) {
+                formalWeight += 2;
+            } else if (CodiStyle.equals("1")) {
+                casualWeight += 2;
+            } else if (CodiStyle.equals("2")) {
+                sportyWeight += 2;
+            }
+        }
+
+        if (feed_3 == 0) {
+            formalWeight += 1;
+        } else if (feed_3 == 1) {
+            casualWeight += 1;
+        } else if (feed_3 == 2) {
+            sportyWeight += 1;
+        } else if (feed_3 == -1) {
+            if (CodiStyle.equals("0")) {
+                formalWeight += 1;
+            } else if (CodiStyle.equals("1")) {
+                casualWeight += 1;
+            } else if (CodiStyle.equals("2")) {
+                sportyWeight += 1;
+            }
+        }
+
+        if (feed_7 == 0) {
+            formalWeight += 4;
+        } else if (feed_7 == 1) {
+            casualWeight += 4;
+        } else if (feed_7 == 2) {
+            sportyWeight += 4;
+        } else if (feed_7 == -1) {
+            if (CodiStyle.equals("0")) {
+                formalWeight += 4;
+            } else if (CodiStyle.equals("1")) {
+                casualWeight += 4;
+            } else if (CodiStyle.equals("2")) {
+                sportyWeight += 4;
+            }
+        }
+
+        if (feed_14 == 0) {
+            formalWeight += 3;
+        } else if (feed_14 == 1) {
+            casualWeight += 3;
+        } else if (feed_14 == 2) {
+            sportyWeight += 3;
+        } else if (feed_14 == -1) {
+            if (CodiStyle.equals("0")) {
+                formalWeight += 3;
+            } else if (CodiStyle.equals("1")) {
+                casualWeight += 3;
+            } else if (CodiStyle.equals("2")) {
+                sportyWeight += 3;
+            }
+        }
+
+        if (feed_21 == 0) {
+            formalWeight += 2;
+        } else if (feed_21 == 1) {
+            casualWeight += 2;
+        } else if (feed_21 == 2) {
+            sportyWeight += 2;
+        } else if (feed_21 == -1) {
+            if (CodiStyle.equals("0")) {
+                formalWeight += 2;
+            } else if (CodiStyle.equals("1")) {
+                casualWeight += 2;
+            } else if (CodiStyle.equals("2")) {
+                sportyWeight += 2;
+            }
+        }
+
+    }
+
+    public void selectTop() {
+        int targetMax = Math.max(casualWeight, Math.max(formalWeight, sportyWeight));
+        String targetStyle = "-1";
+        if (targetMax == formalWeight) {
+            targetStyle = "0";
+        } else if (targetMax == casualWeight) {
+            targetStyle = "1";
+        } else if (targetMax == sportyWeight) {
+            targetStyle = "2";
+        }
+
+        Log.d("targetStyle",targetStyle);
+        for (Map.Entry<String, Top> elem : topMap.entrySet()) {
+            if (targetStyle.equals("0")) {
+                if (elem.getValue().getFormal().equals("1")) {
+                    topMapWeighted.put(elem.getKey(), topMap.get(elem.getKey()));
+                    Log.d("processing",elem.getKey());
+                }
+            } else if (targetStyle.equals("1")) {
+                if (elem.getValue().getCasual().equals("1")) {
+                    topMapWeighted.put(elem.getKey(), topMap.get(elem.getKey()));
+                }
+            } else if (targetStyle.equals("2")) {
+                if (elem.getValue().getSporty().equals("1")) {
+                    topMapWeighted.put(elem.getKey(), topMap.get(elem.getKey()));
+                }
+            }
+        }
+
+
+    }
+
+    public void selectBottom() {
+        int targetMax = Math.max(casualWeight, Math.max(formalWeight, sportyWeight));
+        String targetStyle = "-1";
+        if (targetMax == formalWeight) {
+            targetStyle = "0";
+        } else if (targetMax == casualWeight) {
+            targetStyle = "1";
+        } else if (targetMax == sportyWeight) {
+            targetStyle = "2";
+        }
+
+        for (Map.Entry<String, Bottom> elem : bottomMap.entrySet()) {
+            if (targetStyle.equals("0")) {
+                if (elem.getValue().getFormal().equals("1")) {
+                    bottomMapWeighted.put(elem.getKey(), bottomMap.get(elem.getKey()));
+                }
+            } else if (targetStyle.equals("1")) {
+                if (elem.getValue().getCasual().equals("1")) {
+                    bottomMapWeighted.put(elem.getKey(), bottomMap.get(elem.getKey()));
+                }
+            } else if (targetStyle.equals("2")) {
+                if (elem.getValue().getSporty().equals("1")) {
+                    bottomMapWeighted.put(elem.getKey(), bottomMap.get(elem.getKey()));
+                }
+            }
+        }
+    }
+
+    public void selectOuter() {
+        for (Map.Entry<String, Top> elem : topMap.entrySet()) {
+            if (elem.getValue().getIsOuter().equals("0")) {
+                topMap.remove(elem.getKey());
+            }
+        }
+    }
+
+    public void checkSex() {
+        for (Map.Entry<String, Top> elem : topMapWeighted.entrySet()) {
+            if (singleuser.getGender().equals("남")) {
+                if (elem.getValue().getSex().equals("2")) {
+                    topMapWeighted.remove(elem.getKey());
+                }
+            }
+        }
+        for (Map.Entry<String, Bottom> elem : bottomMapWeighted.entrySet()) {
+            if (singleuser.getGender().equals("남")) {
+                if (elem.getValue().getSex().equals("2")) {
+                    bottomMapWeighted.remove(elem.getKey());
+                }
+            }
+        }
+    }
 }

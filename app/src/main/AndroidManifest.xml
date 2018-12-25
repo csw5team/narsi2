@@ -26,7 +26,6 @@
         </activity>
         <activity android:name=".loginActivity.Create_user_activity" />
         <activity android:name=".getLatLng" />
-        <activity android:name=".DBcheck" />
         <activity android:name=".PreferenceController" />
         <activity
             android:name=".MainViewPager"
