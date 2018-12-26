@@ -48,7 +48,7 @@ public class FeedbackController extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private int update_temp = 100;
+    private int update_temp = 0;
     private int recent_temp;
     private int update_codi = 100;
     //private Feedback update_feedback = user.getFeedback();
