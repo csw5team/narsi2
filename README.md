@@ -6,4 +6,6 @@
 
 1. 안드로이드 휴대폰 (SDK ver >=24) 준비
 2. AndroidStudio (ver >=4.0.0) 설치
-3. 모든 초기 셋팅 완료 후 Shift + F10 키로 Run App
+3. Git Clone github.com/csw5team/narsi2 로 소스코드 다운
+4. Android Studio로 Narsi 패키지 실행
+5. 모든 초기 셋팅 완료 후 Shift + F10 키로 Run App
