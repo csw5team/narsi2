@@ -213,7 +213,7 @@ public class recommendationController extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         user = mAuth.getCurrentUser();
-        Uid = user.getUid();
+        Uid = singleuser.getUserID();
         db = FirebaseFirestore.getInstance();
         getRecommend(Uid, weather);
         readWeather(Uid, lat, lng);

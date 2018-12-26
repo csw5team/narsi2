@@ -180,6 +180,7 @@ public class loginActivity extends AppCompatActivity {
                             String name = "";
                             String gender = document.getString("sex");
                             singleUser.setGender(gender);
+                            singleUser.setUserID(uid);
                             name = document.getString("UserName");
                             if (name != null) {
                                 if (!name.equals("")) {
