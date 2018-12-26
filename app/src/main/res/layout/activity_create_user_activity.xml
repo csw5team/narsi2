@@ -128,7 +128,6 @@
         android:text="회원가입"
         android:textSize="50dp"
         android:fontFamily="@font/tmon"
-        android:textStyle="bold"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

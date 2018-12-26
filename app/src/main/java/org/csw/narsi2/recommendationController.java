@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,10 +100,10 @@ public class recommendationController extends Fragment {
     private FirebaseUser user;
     private ImageView iv_left, iv_right;
     private ImageView iv_mimiroom;
+    private TextView tv_recommend;
     private String CodiStyle, preferTemp;
     private String targetStyle = "-1";
     private int feedbackSum = 0;
-    private int recommendCodi_byFeedback;
     private String avgwspd, avgTemp;
     private String UserTemp;
     private HashMap<String, Top> topMap = new HashMap<>();
@@ -113,6 +114,8 @@ public class recommendationController extends Fragment {
     private HashMap<String, Bottom> bottomMapWeighted2 = new HashMap<>();
     private Others others_mask, others_umbrella;
     private Codi recommendCodi = new Codi() {
+    };
+    private Codi recommendCodis = new Codi() {
     };
     private int formalWeight, casualWeight, sportyWeight = 0;
 
@@ -174,17 +177,18 @@ public class recommendationController extends Fragment {
         iv_bottom = (ImageView) rootView.findViewById(R.id.imageView_bottom);
         iv_umbrella = (ImageView) rootView.findViewById(R.id.imageView_umbrella);
         iv_mask = (ImageView) rootView.findViewById(R.id.imageView_mask);
+        tv_recommend = (TextView) rootView.findViewById(R.id.textView8);
 
         iv_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTopImageView();
+                setTopImageView(recommendCodis);
             }
         });
         iv_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setBottomImageView();
+                setBottomImageView(recommendCodis);
             }
         });
 
@@ -208,16 +212,14 @@ public class recommendationController extends Fragment {
         lng = intent.getExtras().getDouble("lng");
         Log.d("HEll", Double.toString(lat) + Double.toString(lng));
         apiKey = "0d4f48e5-5c2c-4bb5-931a-bca3f92b47d0";
-        targetURL = "http://api2.sktelecom.com/weather/current/hourly?version=1&lat=" + lat + "&lon=" + lng + "&appkey=" + apiKey;
-        targetURL3 = "http://api2.sktelecom.com/weather/forecast/3days?version=1&lat=" + lat + "&lon=" + lng + "&appkey=" + apiKey;
         mAuth = FirebaseAuth.getInstance();
 
         user = mAuth.getCurrentUser();
         Uid = user.getUid();
         db = FirebaseFirestore.getInstance();
-        getRecommend(Uid);
-        readWeather();
-        readWeather2();
+        getRecommend(Uid, weather);
+        readWeather(Uid, lat, lng);
+        readWeather2(Uid, lat, lng);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -271,7 +273,8 @@ public class recommendationController extends Fragment {
     }
 
 
-    public void readWeather() {
+    public void readWeather(String Uid, Double latitude, Double longitude) {
+        targetURL = "http://api2.sktelecom.com/weather/current/hourly?version=1&lat=" + latitude + "&lon=" + longitude + "&appkey=" + apiKey;
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, targetURL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -329,7 +332,8 @@ public class recommendationController extends Fragment {
     }
 
 
-    public void readWeather2() {
+    public void readWeather2(String Uid, Double latitude, Double longitude) {
+        targetURL3 = "http://api2.sktelecom.com/weather/forecast/3days?version=1&lat=" + latitude + "&lon=" + longitude + "&appkey=" + apiKey;
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, targetURL3, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -461,14 +465,22 @@ public class recommendationController extends Fragment {
         second.setBackgroundResource(R.drawable.layout_bg);
         iv_mimiroom.setImageResource(R.drawable.output);
 
-        if (Integer.parseInt(pm10Value) > 80 || Integer.parseInt(pm25Value) > 35) {
-            tv_others.setText("미세먼지가 많아요. 주의하세요");
+
+        if ((Integer.parseInt(pm10Value) > 80 || Integer.parseInt(pm25Value) > 35) && (!type4hour.equals("0") || !type7hour.equals("0") || !type10hour.equals("0") || !type13hour.equals("0") || !type.equals("0"))) {
+            String a = "<font color=\"#d30000\">만반의 준비를 하세요</font>";
+            tv_others.setText(Html.fromHtml(a));
+        } else if (Integer.parseInt(pm10Value) > 80 || Integer.parseInt(pm25Value) > 35) {
+            String a = "<font color=\"#bc1a1a\">미세먼지</font>";
+            String b = "가 엄청나니 ";
+            String c = "<font color=\"#dba530\">마스크</font>";
+            String d = "를 챙기세용";
+            tv_others.setText(Html.fromHtml(a + b + c + d));
         } else if (!type4hour.equals("0") || !type7hour.equals("0") || !type10hour.equals("0") || !type13hour.equals("0") || !type.equals("0")) {
-            tv_others.setText("우산 챙기세요");
+            String a = "<font color=\"#0095cc\">우산</font>";
+            tv_others.setText(Html.fromHtml(a));
         }
-
         tv_info.setText(gu + " " + temperature + "°C");
-
+        tv_recommend.setText("오늘의 추천 코디");
         if (nowWeather.equals("맑음")) {
             tv_weather.setText("오늘은 맑아요");
             iv_left.setImageResource(R.drawable.sunny);
@@ -540,7 +552,7 @@ public class recommendationController extends Fragment {
     }
 
 
-    public void getRecommend(final String Uid) {
+    public void getRecommend(final String Uid, Weather weather) {
         getPreference(Uid);
         getFeedback(Uid);
 
@@ -649,7 +661,8 @@ public class recommendationController extends Fragment {
                                     Log.d("feed_14", String.valueOf(feed_14));
                                     Log.d("feed_21", String.valueOf(feed_21));
 
-                                    while(CodiStyle==null){}
+                                    while (CodiStyle == null) {
+                                    }
                                     analysisFeedback(CodiStyle);
                                     Log.d("casualweight", String.valueOf(casualWeight));
                                     Log.d("formalWeight", String.valueOf(formalWeight));
@@ -698,7 +711,7 @@ public class recommendationController extends Fragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                if (Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp) > 10) {
+                                if (Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp) >= 10) {
                                     selectOuter();
                                 }
                                 Log.d("temp_diff", String.valueOf(Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp)));
@@ -791,6 +804,10 @@ public class recommendationController extends Fragment {
     }
 
     public void displayCodi() {
+
+        recommendCodi.setTop(topMapWeighted2);
+        recommendCodi.setBottom(bottomMapWeighted2);
+
         if (Integer.parseInt(pm10Value) > 80 || Integer.parseInt(pm25Value) > 35) {
             others_mask = new Others("mask");
             iv_mask.setImageResource(R.drawable.mask);
@@ -804,16 +821,13 @@ public class recommendationController extends Fragment {
         } else {
             iv_umbrella.setVisibility(View.GONE);
         }
-
-        recommendCodi.setTop(topMapWeighted2);
-        recommendCodi.setBottom(bottomMapWeighted2);
-
-        setTopImageView();
-        setBottomImageView();
+        recommendCodis = getCodi();
+        setTopImageView(recommendCodis);
+        setBottomImageView(recommendCodis);
 
     }
 
-    public void analysisFeedback(String CodiStyle) {
+    public void analysisFeedback(String CodiFeedback) {
 
         if (feed_1 == 0) {
             formalWeight += 3;
@@ -822,11 +836,11 @@ public class recommendationController extends Fragment {
         } else if (feed_1 == 2) {
             sportyWeight += 3;
         } else if (feed_1 == -1) {
-            if (CodiStyle.equals("0")) {
+            if (CodiFeedback.equals("0")) {
                 formalWeight += 3;
-            } else if (CodiStyle.equals("1")) {
+            } else if (CodiFeedback.equals("1")) {
                 casualWeight += 3;
-            } else if (CodiStyle.equals("2")) {
+            } else if (CodiFeedback.equals("2")) {
                 sportyWeight += 3;
             }
         }
@@ -838,11 +852,11 @@ public class recommendationController extends Fragment {
         } else if (feed_2 == 2) {
             sportyWeight += 2;
         } else if (feed_2 == -1) {
-            if (CodiStyle.equals("0")) {
+            if (CodiFeedback.equals("0")) {
                 formalWeight += 2;
-            } else if (CodiStyle.equals("1")) {
+            } else if (CodiFeedback.equals("1")) {
                 casualWeight += 2;
-            } else if (CodiStyle.equals("2")) {
+            } else if (CodiFeedback.equals("2")) {
                 sportyWeight += 2;
             }
         }
@@ -854,11 +868,11 @@ public class recommendationController extends Fragment {
         } else if (feed_3 == 2) {
             sportyWeight += 1;
         } else if (feed_3 == -1) {
-            if (CodiStyle.equals("0")) {
+            if (CodiFeedback.equals("0")) {
                 formalWeight += 1;
-            } else if (CodiStyle.equals("1")) {
+            } else if (CodiFeedback.equals("1")) {
                 casualWeight += 1;
-            } else if (CodiStyle.equals("2")) {
+            } else if (CodiFeedback.equals("2")) {
                 sportyWeight += 1;
             }
         }
@@ -870,11 +884,11 @@ public class recommendationController extends Fragment {
         } else if (feed_7 == 2) {
             sportyWeight += 4;
         } else if (feed_7 == -1) {
-            if (CodiStyle.equals("0")) {
+            if (CodiFeedback.equals("0")) {
                 formalWeight += 4;
-            } else if (CodiStyle.equals("1")) {
+            } else if (CodiFeedback.equals("1")) {
                 casualWeight += 4;
-            } else if (CodiStyle.equals("2")) {
+            } else if (CodiFeedback.equals("2")) {
                 sportyWeight += 4;
             }
         }
@@ -886,11 +900,11 @@ public class recommendationController extends Fragment {
         } else if (feed_14 == 2) {
             sportyWeight += 3;
         } else if (feed_14 == -1) {
-            if (CodiStyle.equals("0")) {
+            if (CodiFeedback.equals("0")) {
                 formalWeight += 3;
-            } else if (CodiStyle.equals("1")) {
+            } else if (CodiFeedback.equals("1")) {
                 casualWeight += 3;
-            } else if (CodiStyle.equals("2")) {
+            } else if (CodiFeedback.equals("2")) {
                 sportyWeight += 3;
             }
         }
@@ -902,18 +916,18 @@ public class recommendationController extends Fragment {
         } else if (feed_21 == 2) {
             sportyWeight += 2;
         } else if (feed_21 == -1) {
-            if (CodiStyle.equals("0")) {
+            if (CodiFeedback.equals("0")) {
                 formalWeight += 2;
-            } else if (CodiStyle.equals("1")) {
+            } else if (CodiFeedback.equals("1")) {
                 casualWeight += 2;
-            } else if (CodiStyle.equals("2")) {
+            } else if (CodiFeedback.equals("2")) {
                 sportyWeight += 2;
             }
         }
 
     }
 
-    public void selectTop() {
+    public void selectTop(HashMap<String, Top> topMap, String targetStyle) {
         int targetMax = Math.max(casualWeight, Math.max(formalWeight, sportyWeight));
         if (targetMax == formalWeight) {
             targetStyle = "0";
@@ -947,8 +961,16 @@ public class recommendationController extends Fragment {
 
     }
 
-    public void selectBottom() {
+    public void selectBottom(HashMap<String, Bottom> bottomMap, String targetStyle) {
         Log.d("selectBottom", "processing");
+        int targetMax = Math.max(casualWeight, Math.max(formalWeight, sportyWeight));
+        if (targetMax == formalWeight) {
+            targetStyle = "0";
+        } else if (targetMax == casualWeight) {
+            targetStyle = "1";
+        } else if (targetMax == sportyWeight) {
+            targetStyle = "2";
+        }
 
         while (targetStyle.equals("-1")) ;
         for (Map.Entry<String, Bottom> elem : bottomMap.entrySet()) {
@@ -999,7 +1021,7 @@ public class recommendationController extends Fragment {
         }
     }
 
-    public void setTopImageView() {
+    public void setTopImageView(Codi recommendCodi) {
         try {
             Random random = new Random();
             int index = random.nextInt(recommendCodi.getTop().size());
@@ -1017,7 +1039,7 @@ public class recommendationController extends Fragment {
         }
     }
 
-    public void setBottomImageView() {
+    public void setBottomImageView(Codi recommendCodi) {
         try {
             Random random2 = new Random();
             int index2 = random2.nextInt(recommendCodi.getBottom().size());
@@ -1036,8 +1058,13 @@ public class recommendationController extends Fragment {
 
     public void calculateRecommends() {
 
-        selectTop();
-        selectBottom();
+        selectTop(topMap, targetStyle);
+        selectBottom(bottomMap, targetStyle);
         checkGender();
     }
+
+    public Codi getCodi() {
+        return recommendCodi;
+    }
+
 }
