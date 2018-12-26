@@ -12,4 +12,8 @@ public class Top extends Clothes {
     public void setIsOuter(String isOuter) {
         this.isOuter = isOuter;
     }
+
+    public void selectTop(){
+
+    }
 }

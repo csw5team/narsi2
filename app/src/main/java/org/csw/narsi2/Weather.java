@@ -85,4 +85,5 @@ public class Weather {
     public void setWaterType(String waterType) {
         this.waterType = waterType;
     }
+
 }

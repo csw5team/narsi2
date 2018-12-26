@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,8 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -72,7 +69,7 @@ public class recommendationController extends Fragment {
     private ProgressBar progressBar;
     private ConstraintLayout layout_waiting, first, second;
 
-    private String temperature, city, gu, humidity, nowWeather, airPollution, highestTemp, lowestTemp, wspd, wctIndex, type, precipitation;
+    private String temperature, city, gu, nowWeather, highestTemp, lowestTemp, wspd, type, precipitation;
     private String pm10Value, pm25Value;
     private String wspd4hour, wspd7hour, wspd10hour, wspd13hour;
     private String type4hour, type7hour, type10hour, type13hour;
@@ -115,7 +112,8 @@ public class recommendationController extends Fragment {
     private HashMap<String, Top> topMapWeighted2 = new HashMap<>();
     private HashMap<String, Bottom> bottomMapWeighted2 = new HashMap<>();
     private Others others_mask, others_umbrella;
-    private Codi recommendCodi;
+    private Codi recommendCodi = new Codi() {
+    };
     private int formalWeight, casualWeight, sportyWeight = 0;
 
     // TODO: Rename and change types of parameters
@@ -180,13 +178,13 @@ public class recommendationController extends Fragment {
         iv_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTop();
+                setTopImageView();
             }
         });
         iv_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setBottom();
+                setBottomImageView();
             }
         });
 
@@ -225,11 +223,11 @@ public class recommendationController extends Fragment {
             @Override
             public void run() {
                 apiKey2 = "k4EQ4%2F5OWx0mMD0gkif7DSIBL4Wr2atojsRiHmY21vl1FcPsUIUusSXeL1xyVGcNAmciyWc3OUQmgmqaH1kPlg%3D%3D";
-                if(city==null){
+                if (city == null) {
                     city = "서울";
                 }
                 targetURL2 = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?sidoName=" + city + "&pageNo=1&numOfRows=1&ServiceKey=" + apiKey2 + "&ver=1.3&_returnType=json";
-                find_airPollution();
+                gatherTogether();
 
             }
         }, 500);
@@ -306,8 +304,6 @@ public class recommendationController extends Fragment {
                         city = (whereGu.getString("city"));
                         //습도
 
-                        humidity = Long.toString(Math.round(Double.parseDouble(main_object.getString("humidity"))));
-
                         nowWeather = main_object.getJSONObject("sky").getString("name");
 
 
@@ -381,7 +377,7 @@ public class recommendationController extends Fragment {
     }
 
 
-    public void find_airPollution() {
+    public void gatherTogether() {
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, targetURL2, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -407,8 +403,7 @@ public class recommendationController extends Fragment {
                     avgwspd = String.valueOf((Double.parseDouble(wspd4hour) + Double.parseDouble(wspd7hour) + Double.parseDouble(wspd10hour) + Double.parseDouble(wspd13hour)) / 4.0);
                     weather.setAvgWindspeed(avgwspd);
 
-                    getFeedback(Uid);
-                    calculateTemp(Uid);
+                    calculateTemp(preferTemp, temperature, Uid);
 
 
                 } catch (JSONException e) {
@@ -546,6 +541,12 @@ public class recommendationController extends Fragment {
 
 
     public void getRecommend(final String Uid) {
+        getPreference(Uid);
+        getFeedback(Uid);
+
+    }
+
+    public void getPreference(String Uid) {
         DocumentReference docRef = db.collection("user_final").document(Uid);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -589,7 +590,6 @@ public class recommendationController extends Fragment {
 
                 long now = System.currentTimeMillis();
                 final Date date = new Date(now);
-                String getTimeYMD = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
                 db.collection("user_final").document(Uid).collection("Feedback")
                         .get()
@@ -649,7 +649,8 @@ public class recommendationController extends Fragment {
                                     Log.d("feed_14", String.valueOf(feed_14));
                                     Log.d("feed_21", String.valueOf(feed_21));
 
-                                    analysisFeedback();
+                                    while(CodiStyle==null){}
+                                    analysisFeedback(CodiStyle);
                                     Log.d("casualweight", String.valueOf(casualWeight));
                                     Log.d("formalWeight", String.valueOf(formalWeight));
                                     Log.d("sportyWeight", String.valueOf(sportyWeight));
@@ -661,10 +662,10 @@ public class recommendationController extends Fragment {
 
 
             }
-        }, 0);
+        }, 100);
     }
 
-    public void calculateTemp(String Uid) {
+    public void calculateTemp(final String preferTemp, String temperature, String Uid) {
 
         final long tempTemp = Math.round((13.12 + 0.6215 * Double.parseDouble(temperature) - 11.37 * Math.pow((Double.parseDouble(avgwspd) * 3.6), 0.16) + 0.3965 * Math.pow((Double.parseDouble(avgwspd) * 3.6), 0.16) * Double.parseDouble(avgTemp)) * 100) / 100;
 
@@ -687,8 +688,8 @@ public class recommendationController extends Fragment {
                         }
                         Log.d("feedbacksum", String.valueOf(feedbackSum));
 
-                        preferTemp = String.valueOf((Integer.parseInt(preferTemp) + feedbackSum));
-                        UserTemp = String.valueOf((int) (tempTemp + Double.parseDouble(preferTemp)));
+                        final String preferTemp2 = String.valueOf((Integer.parseInt(preferTemp) + feedbackSum));
+                        UserTemp = String.valueOf((int) (tempTemp + Double.parseDouble(preferTemp2)));
 
                         Log.d("UserTemp : ", UserTemp);
 
@@ -697,14 +698,11 @@ public class recommendationController extends Fragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-
                                 if (Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp) > 10) {
                                     selectOuter();
                                 }
                                 Log.d("temp_diff", String.valueOf(Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp)));
-                                selectTop();
-                                selectBottom();
-                                checkSex();
+                                calculateRecommends();
 
                                 for (Map.Entry<String, Top> elem : topMapWeighted2.entrySet()) {
                                     Log.d("selected top", elem.getKey());
@@ -717,7 +715,7 @@ public class recommendationController extends Fragment {
                                 Log.d("bottommapweighted", String.valueOf(bottomMapWeighted2.size()));
 
                                 display();
-                                display2();
+                                displayCodi();
 
 
                                 layout_waiting.setVisibility(View.GONE);
@@ -784,16 +782,18 @@ public class recommendationController extends Fragment {
                                     }
                                 }
 
-                            }Log.d("bottomMapsize",String.valueOf(bottomMap.size()));
+                            }
+                            Log.d("bottomMapsize", String.valueOf(bottomMap.size()));
                         } else {
                         }
                     }
                 });
-
+        recommendCodi.setTop(topMap);
+        recommendCodi.setBottom(bottomMap);
 
     }
 
-    public void display2() {
+    public void displayCodi() {
         if (Integer.parseInt(pm10Value) > 80 || Integer.parseInt(pm25Value) > 35) {
             others_mask = new Others("mask");
             iv_mask.setImageResource(R.drawable.mask);
@@ -808,12 +808,12 @@ public class recommendationController extends Fragment {
             iv_umbrella.setVisibility(View.GONE);
         }
 
-        setTop();
-        setBottom();
+        setTopImageView();
+        setBottomImageView();
 
     }
 
-    public void analysisFeedback() {
+    public void analysisFeedback(String CodiStyle) {
 
         if (feed_1 == 0) {
             formalWeight += 3;
@@ -984,8 +984,7 @@ public class recommendationController extends Fragment {
                 if (!elem.getValue().getSex().equals("2")) {
                     topMapWeighted2.put(elem.getKey(), topMapWeighted.get(elem.getKey()));
                 }
-            }
-            else if(singleuser.getGender().equals("여")){
+            } else if (singleuser.getGender().equals("여")) {
                 topMapWeighted2 = topMapWeighted;
             }
         }
@@ -994,13 +993,13 @@ public class recommendationController extends Fragment {
                 if (!elem.getValue().getSex().equals("2")) {
                     bottomMapWeighted2.put(elem.getKey(), bottomMapWeighted.get(elem.getKey()));
                 }
-            }else if(singleuser.getGender().equals("여")){
+            } else if (singleuser.getGender().equals("여")) {
                 bottomMapWeighted2 = bottomMapWeighted;
             }
         }
     }
 
-    public void setTop() {
+    public void setTopImageView() {
         try {
             Random random = new Random();
             int index = random.nextInt(topMapWeighted2.size());
@@ -1012,13 +1011,13 @@ public class recommendationController extends Fragment {
             int resID = res.getIdentifier(mDrawableName, "drawable", getContext().getPackageName());
             Drawable drawable = res.getDrawable(resID);
             iv_top.setImageDrawable(drawable);
-        }catch
-                (Exception e){
+        } catch
+                (Exception e) {
             Toast.makeText(getContext(), "의류 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void setBottom() {
+    public void setBottomImageView() {
         try {
             Random random2 = new Random();
             int index2 = random2.nextInt(bottomMapWeighted2.size());
@@ -1030,9 +1029,15 @@ public class recommendationController extends Fragment {
             int resID2 = res2.getIdentifier(mDrawableName2, "drawable", getContext().getPackageName());
             Drawable drawable2 = res2.getDrawable(resID2);
             iv_bottom.setImageDrawable(drawable2);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             Toast.makeText(getContext(), "의류 정보를 불러올 수 없습니다", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void calculateRecommends() {
+
+        selectTop();
+        selectBottom();
+        checkSex();
     }
 }

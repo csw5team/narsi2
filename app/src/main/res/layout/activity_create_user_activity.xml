@@ -59,11 +59,12 @@
         app:layout_constraintEnd_toStartOf="@+id/user_age"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_password2" />
+
     <EditText
         android:id="@+id/user_age"
         android:layout_width="69dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_marginStart="124dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:hint="나이"
@@ -74,7 +75,7 @@
 
     <Spinner
         android:id="@+id/user_sex"
-        android:layout_width="92dp"
+        android:layout_width="115dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

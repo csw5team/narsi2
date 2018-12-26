@@ -1,49 +1,33 @@
 package org.csw.narsi2;
 
+import java.util.HashMap;
+
 public class Codi {
 
-    private Clothes top, bottom;
-    private Others[] others;
+    private HashMap<String,Top> top ;
+    private HashMap<String,Bottom> bottom ;
 
 
+    public Codi() {
+    }
 
-    public Codi(){}
-
-    public Codi(Clothes top, Clothes bottom) {
+    public void setTop(HashMap top){
         this.top = top;
+    }
+    public void setBottom(HashMap bottom){
         this.bottom = bottom;
     }
 
-
-    public Codi(Clothes top, Clothes bottom, Others[] others) {
-        this.top = top;
-        this.bottom = bottom;
-        this.others = others;
+    public void setOuter(HashMap outerTop){
+        this.top = outerTop;
     }
 
-    public Others[] getOthers() {
-
-        return others;
-    }
-
-    public void setOthers(Others[] others) {
-        this.others = others;
-    }
-
-    public Clothes getTop() {
-
+    public HashMap<String, Top> getTop() {
         return top;
     }
 
-    public void setTop(Clothes top) {
-        this.top = top;
-    }
-
-    public Clothes getBottom() {
+    public HashMap<String, Bottom> getBottom() {
         return bottom;
     }
 
-    public void setBottom(Clothes bottom) {
-        this.bottom = bottom;
-    }
 }
