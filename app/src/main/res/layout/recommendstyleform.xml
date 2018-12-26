@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="180dp"
-            android:layout_height="60dp"
+            android:layout_width="150dp"
+            android:layout_height="53dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
@@ -43,11 +43,11 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_1"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="0dp"
+            android:layout_height="115dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="60dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/layout_2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,10 +87,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/bom"
-                android:textSize="30sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView5"
                 app:layout_constraintEnd_toStartOf="@+id/imageView11"
@@ -105,7 +105,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/bom"
-                android:textSize="20sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView6"
                 app:layout_constraintEnd_toStartOf="@+id/imageView11"
                 app:layout_constraintStart_toEndOf="@+id/imageView10" />
@@ -117,8 +117,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="24dp"
-                android:fontFamily="bom"
-                android:textSize="14sp"
+                android:fontFamily="@font/bom"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView11"
                 app:layout_constraintStart_toEndOf="@+id/imageView10" />
@@ -127,46 +127,46 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_2"
-            android:layout_width="match_parent"
-            android:layout_height="360dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="0dp"
+            android:layout_height="365dp"
 
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintHorizontal_bias="0.888"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_1">
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-
                 android:fontFamily="@font/bom"
-                android:textAlignment="center"
-                android:textSize="28sp"
+                android:gravity="center"
+                android:textSize="30dp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/mimiroom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/mimiroom"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="0dp"
+                android:layout_height="293dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="16dp"
                 android:src="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView_top"
@@ -176,14 +176,13 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:elevation="2dp"
                 android:src="@android:color/white"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.366" />
+                app:layout_constraintVertical_bias="0.556" />
 
             <ImageView
                 android:id="@+id/imageView_bottom"
@@ -193,19 +192,19 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-
+                android:elevation="2dp"
                 android:src="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.702"
+                app:layout_constraintHorizontal_bias="0.708"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.785" />
+                app:layout_constraintVertical_bias="0.896" />
 
             <ImageView
                 android:id="@+id/imageView_umbrella"
-                android:layout_width="100dp"
-                android:layout_height="150dp"
+                android:layout_width="77dp"
+                android:layout_height="130dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -213,10 +212,10 @@
                 android:src="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.031"
+                app:layout_constraintHorizontal_bias="0.096"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.752" />
+                app:layout_constraintVertical_bias="0.893" />
 
             <ImageView
                 android:id="@+id/imageView_mask"
@@ -229,23 +228,25 @@
                 android:src="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.936"
+                app:layout_constraintHorizontal_bias="0.926"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.188" />
-        </android.support.constraint.ConstraintLayout>
+                app:layout_constraintVertical_bias="0.276" />
 
+        </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_waiting"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:background="#BB000000"
             android:elevation="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -263,8 +264,5 @@
 
         </android.support.constraint.ConstraintLayout>
 
-
-
     </android.support.constraint.ConstraintLayout>
-
 </FrameLayout>

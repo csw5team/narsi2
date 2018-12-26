@@ -28,14 +28,16 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/output.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/output.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_user_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_user_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_getinfo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_getinfo.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_loginactivity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_loginactivity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/recommendstyleform.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/recommendstyleform.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/setfeedbackform.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/setfeedbackform.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/setpreferenceform.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/setpreferenceform.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,8 +63,8 @@
       <file leaf-file-name="recommendationController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="190" column="49" selection-start-line="190" selection-start-column="49" selection-end-line="190" selection-end-column="49" />
+            <state relative-caret-position="584">
+              <caret line="467" selection-start-line="467" selection-end-line="467" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7026#7191#0" expanded="true" />
@@ -70,6 +72,39 @@
                 <element signature="e#44339#44340#0" expanded="true" />
                 <element signature="e#44375#44376#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setpreferenceform.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/setpreferenceform.xml">
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="158">
+              <caret line="210" column="25" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PreferenceController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="179" column="59" selection-start-line="179" selection-start-column="59" selection-end-line="179" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="recommendstyleform.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recommendstyleform.xml">
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="164" selection-start-line="164" selection-end-line="164" />
             </state>
           </provider>
         </entry>
@@ -93,54 +128,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setfeedbackform.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/setfeedbackform.xml">
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="2888">
-              <caret line="152" selection-start-line="152" selection-end-line="152" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="setpreferenceform.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/setpreferenceform.xml">
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="1216">
-              <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recommendstyleform.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recommendstyleform.xml">
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="180" selection-start-line="180" selection-end-line="180" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_loginactivity.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_loginactivity.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1254">
-              <caret line="66" column="30" selection-start-line="66" selection-start-column="30" selection-end-line="66" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="colors.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
           <provider selected="true" editor-type-id="text-editor">
@@ -155,18 +142,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
               <caret line="2" column="33" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_create_user_activity.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_create_user_activity.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2451">
-              <caret line="129" column="38" selection-start-line="129" selection-start-column="34" selection-end-line="129" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -189,13 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mimiroom</find>
-      <find>type4hour</find>
-      <find>mimi</find>
-      <find>UserTemp</find>
-      <find>readWeather</find>
-      <find>weather</find>
-      <find>getPreference</find>
       <find>getfeedback</find>
       <find>analysis</find>
       <find>analysisFeedback</find>
@@ -219,6 +187,13 @@
       <find>displayCodi</find>
       <find>recommendcodi</find>
       <find>Codi recomm</find>
+      <find>type4hour</find>
+      <find>pm10</find>
+      <find>backgroun</find>
+      <find>mimi</find>
+      <find>모두 선택</find>
+      <find>//pm</find>
+      <find>//type</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2522,7 +2497,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Codi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Top.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Weather.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Clothes.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_create_user_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_loginactivity.xml" />
@@ -2530,6 +2504,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/setfeedbackform.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/setpreferenceform.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/recommendstyleform.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" />
       </list>
     </option>
@@ -2574,12 +2549,6 @@
               <item name="narsi2" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="narsi2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
@@ -2600,6 +2569,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alsrn\AndroidStudioProjects\narsi2\app\src\main\res\layout" />
       <recent name="C:\Users\alsrn\AndroidStudioProjects\narsi2\app\src\main\res\drawable" />
       <recent name="C:\Users\alsrn\AndroidStudioProjects\narsi2\app\src\main\res" />
     </key>
@@ -2769,7 +2739,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545812396308</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="All clear">
+      <created>1545824934547</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1545824934547</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2791,13 +2768,13 @@
       <window_info id="Captures" order="7" weight="0.25" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="0" />
-      <window_info content_ui="combo" id="Project" order="4" visible="true" weight="0.18724832" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.18724832" />
       <window_info anchor="bottom" id="Build" order="0" weight="0.33238232" />
       <window_info anchor="right" id="Gradle" order="3" />
       <window_info id="Structure" order="5" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="2" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info active="true" anchor="bottom" id="Debug" order="9" visible="true" weight="0.18116976" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.29243937" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" order="5" weight="0.4" />
@@ -2815,7 +2792,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="main scenario implementation" />
     <MESSAGE value="main scenario implementation(Clothes img_file_add)" />
-    <option name="LAST_COMMIT_MESSAGE" value="main scenario implementation(Clothes img_file_add)" />
+    <MESSAGE value="All clear" />
+    <option name="LAST_COMMIT_MESSAGE" value="All clear" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2984,13 +2962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="139" column="28" selection-start-line="139" selection-start-column="28" selection-end-line="139" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/icon.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -3077,16 +3048,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/setpreferenceform.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="1216">
-          <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_loginactivity.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3122,16 +3083,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recommendstyleform.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="180" selection-start-line="180" selection-end-line="180" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/Codi.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -3149,10 +3100,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/recommendstyleform.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="164" selection-start-line="164" selection-end-line="164" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/setpreferenceform.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="210" column="25" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="179" column="59" selection-start-line="179" selection-start-column="59" selection-end-line="179" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="190" column="49" selection-start-line="190" selection-start-column="49" selection-end-line="190" selection-end-column="49" />
+        <state relative-caret-position="584">
+          <caret line="467" selection-start-line="467" selection-end-line="467" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7026#7191#0" expanded="true" />

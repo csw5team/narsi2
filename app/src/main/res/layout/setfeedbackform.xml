@@ -11,6 +11,21 @@
         android:background="#ffffff"
         >
 
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="336dp"
+            android:layout_height="346dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#e8edf1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11"
+            app:layout_constraintVertical_bias="0.0" />
+
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="match_parent"
@@ -50,6 +65,20 @@
             app:srcCompat="@drawable/title" />
 
         <TextView
+            android:id="@+id/textView11"
+            android:layout_width="336dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="#e8edf1"
+            app:layout_constraintBottom_toTopOf="@+id/cloth_FD_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/weather_FD_text"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -58,7 +87,7 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/bom"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +102,8 @@
             android:fontFamily="@font/bom"
             android:text="이 중 오늘 어떤 스타일에 가장 가까웠나요?"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:gravity="center"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +120,7 @@
             android:text="더웠어요"
             android:textOff="더웠어요"
             android:textOn="더웠어요"
-            android:textSize="16sp"
+            android:textSize="10dp"
             app:layout_constraintEnd_toStartOf="@+id/button_cold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/weather_FD_text" />
@@ -103,7 +133,7 @@
             android:text="추웠어요"
             android:textOff="추웠어요"
             android:textOn="추웠어요"
-            android:textSize="16sp"
+            android:textSize="10dp"
             app:layout_constraintBottom_toTopOf="@+id/cloth_FD_text"
             app:layout_constraintEnd_toStartOf="@+id/button_good"
             app:layout_constraintStart_toEndOf="@+id/button_hot"
@@ -120,7 +150,7 @@
             android:textAllCaps="true"
             android:textOff="좋았어요"
             android:textOn="좋았어요"
-            android:textSize="16sp"
+            android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/weather_FD_text" />
 
@@ -133,8 +163,7 @@
             android:text="캐주얼"
             android:textOff="캐주얼"
             android:textOn="캐주얼"
-            android:textSize="16sp"
-
+            android:textSize="10dp"
             app:layout_constraintEnd_toStartOf="@+id/button_sporty"
             app:layout_constraintStart_toEndOf="@+id/button_formal"
             app:layout_constraintTop_toBottomOf="@+id/imageView8" />
@@ -149,8 +178,7 @@
             android:text="스포티"
             android:textOff="스포티"
             android:textOn="스포티"
-            android:textSize="16sp"
-
+            android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
@@ -166,7 +194,7 @@
             android:text="포멀"
             android:textOff="포멀"
             android:textOn="포멀"
-            android:textSize="16sp"
+            android:textSize="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_casual"
             app:layout_constraintHorizontal_bias="0.25"
@@ -182,18 +210,17 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/bom"
+            android:fontFamily="@font/tmon"
             android:text="저장"
             android:textOff="완료"
             android:textOn="완료"
-            android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.914"
+            app:layout_constraintHorizontal_bias="0.935"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_sporty"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.269" />
+
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

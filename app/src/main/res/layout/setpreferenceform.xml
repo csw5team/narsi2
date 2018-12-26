@@ -7,6 +7,22 @@
     android:background="#ffffff"
     tools:context=".PreferenceController">
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="#e8edf1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="150dp"
@@ -20,31 +36,35 @@
         app:layout_constraintVertical_bias="0.015"
         app:srcCompat="@drawable/main_2" />
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="174dp"
-        android:layout_height="52dp"
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/tmon"
+        android:text="취향을 알고 싶어요"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintHorizontal_bias="0.625"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/personalizing_1" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/bom"
+        android:gravity="center_vertical"
         android:text="Q. 회원님의 평소 옷 입는 스타일을 알맞게 표현한 말은 무엇인가요?"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,6 +77,7 @@
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
         android:layout_height="240dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="84dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,11 +137,13 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/bom"
+        android:gravity="center_vertical"
         android:text="Q. 평소 더위/추위를 많이 타시나요?"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -136,7 +159,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/bom"
@@ -153,7 +175,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/bom"
@@ -169,7 +190,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/bom"
@@ -189,15 +209,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="#ffffff"
-        android:fontFamily="@font/bom"
+        android:fontFamily="@font/tmon"
         android:text="확인"
         android:textSize="22dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imcold"
-        app:layout_constraintVertical_bias="0.419" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

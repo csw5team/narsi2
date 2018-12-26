@@ -178,7 +178,6 @@ public class recommendationController extends Fragment {
         iv_umbrella = (ImageView) rootView.findViewById(R.id.imageView_umbrella);
         iv_mask = (ImageView) rootView.findViewById(R.id.imageView_mask);
         tv_recommend = (TextView) rootView.findViewById(R.id.textView8);
-
         iv_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -463,6 +462,7 @@ public class recommendationController extends Fragment {
 
         first.setBackgroundResource(R.drawable.layout_bg);
         second.setBackgroundResource(R.drawable.layout_bg);
+        iv_mimiroom.setBackgroundResource(R.drawable.layout_bg);
         iv_mimiroom.setImageResource(R.drawable.output);
 
 

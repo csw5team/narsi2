@@ -177,7 +177,7 @@ public class PreferenceController extends AppCompatActivity {
 
     public void setPreference(String Uid, int CodiStyle, int temp) {
         if (!((isCheck_casual||isCheck_formal||isCheck_sporty)&&(isCheck_cold||isCheck_hot||isCheck_know))) {
-            Toast.makeText(PreferenceController.this, "모두 선택해주세요", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PreferenceController.this, "답변을 모두 선택해주세요", Toast.LENGTH_SHORT).show();
         } else {
 
             Intent intent = getIntent();
