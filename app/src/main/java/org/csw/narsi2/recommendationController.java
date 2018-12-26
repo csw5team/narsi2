@@ -693,7 +693,8 @@ public class recommendationController extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                feedbackSum += Integer.parseInt(document.getString("tempFeed"));
+                                if (document.getString("tempFeed") != null)
+                                    feedbackSum += Integer.parseInt(document.getString("tempFeed"));
 
                             }
                         } else {
