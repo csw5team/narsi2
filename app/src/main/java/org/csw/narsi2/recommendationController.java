@@ -788,9 +788,6 @@ public class recommendationController extends Fragment {
                         }
                     }
                 });
-        recommendCodi.setTop(topMap);
-        recommendCodi.setBottom(bottomMap);
-
     }
 
     public void displayCodi() {
@@ -807,6 +804,9 @@ public class recommendationController extends Fragment {
         } else {
             iv_umbrella.setVisibility(View.GONE);
         }
+
+        recommendCodi.setTop(topMapWeighted2);
+        recommendCodi.setBottom(bottomMapWeighted2);
 
         setTopImageView();
         setBottomImageView();
@@ -977,8 +977,8 @@ public class recommendationController extends Fragment {
         }
     }
 
-    public void checkSex() {
-        Log.d("checkSex", "processing");
+    public void checkGender() {
+        Log.d("checkGender", "processing");
         for (Map.Entry<String, Top> elem : topMapWeighted.entrySet()) {
             if (singleuser.getGender().equals("남")) {
                 if (!elem.getValue().getSex().equals("2")) {
@@ -1002,8 +1002,8 @@ public class recommendationController extends Fragment {
     public void setTopImageView() {
         try {
             Random random = new Random();
-            int index = random.nextInt(topMapWeighted2.size());
-            List keys = new ArrayList<>(topMapWeighted2.keySet());
+            int index = random.nextInt(recommendCodi.getTop().size());
+            List keys = new ArrayList<>(recommendCodi.getTop().keySet());
             String key = keys.get(index).toString();
 
             Resources res = getResources();
@@ -1020,8 +1020,8 @@ public class recommendationController extends Fragment {
     public void setBottomImageView() {
         try {
             Random random2 = new Random();
-            int index2 = random2.nextInt(bottomMapWeighted2.size());
-            List keys2 = new ArrayList<>(bottomMapWeighted2.keySet());
+            int index2 = random2.nextInt(recommendCodi.getBottom().size());
+            List keys2 = new ArrayList<>(recommendCodi.getBottom().keySet());
             String key2 = keys2.get(index2).toString();
 
             Resources res2 = getResources();
@@ -1038,6 +1038,6 @@ public class recommendationController extends Fragment {
 
         selectTop();
         selectBottom();
-        checkSex();
+        checkGender();
     }
 }
