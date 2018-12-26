@@ -23,11 +23,12 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/FeedbackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/FeedbackController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,15 +51,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="recommendationController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="recommendationController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="690" column="24" selection-start-line="690" selection-start-column="24" selection-end-line="690" selection-end-column="24" />
+            <state relative-caret-position="371">
+              <caret line="1022" column="52" selection-start-line="1022" selection-start-column="52" selection-end-line="1022" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7026#7191#0" expanded="true" />
                 <element signature="e#7190#7191#0" expanded="true" />
+                <element signature="e#8546#9111#0" expanded="true" />
+                <element signature="e#9110#9111#0" expanded="true" />
+                <element signature="e#10501#12636#0" expanded="true" />
+                <element signature="e#12635#12636#0" expanded="true" />
+                <element signature="e#13201#15069#0" expanded="true" />
+                <element signature="e#15068#15069#0" expanded="true" />
+                <element signature="e#15448#16919#0" expanded="true" />
+                <element signature="e#16918#16919#0" expanded="true" />
+                <element signature="e#17543#18457#0" expanded="true" />
+                <element signature="e#18456#18457#0" expanded="true" />
+                <element signature="e#22935#23469#0" expanded="true" />
+                <element signature="e#23468#23469#0" expanded="true" />
+                <element signature="e#23596#24071#0" expanded="true" />
+                <element signature="e#24070#24071#0" expanded="true" />
+                <element signature="e#24163#28546#0" expanded="true" />
+                <element signature="e#24499#28518#0" expanded="true" />
+                <element signature="e#28517#28518#0" expanded="true" />
+                <element signature="e#28545#28546#0" expanded="true" />
+                <element signature="e#29172#31652#0" expanded="true" />
+                <element signature="e#30283#31603#0" expanded="true" />
+                <element signature="e#31602#31603#0" expanded="true" />
+                <element signature="e#31651#31652#0" expanded="true" />
+                <element signature="e#31812#33596#0" expanded="true" />
+                <element signature="e#33595#33596#0" expanded="true" />
+                <element signature="e#33701#35547#0" expanded="true" />
+                <element signature="e#35546#35547#0" expanded="true" />
                 <element signature="e#44339#44340#0" expanded="true" />
                 <element signature="e#44375#44376#0" expanded="true" />
               </folding>
@@ -66,11 +93,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FeedbackController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-40">
+              <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FeedbackController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/FeedbackController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
-              <caret line="119" column="33" lean-forward="true" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
+              <caret line="119" column="33" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,28 +187,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="layout_bg.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/layout_bg.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
               <caret line="2" column="33" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="33" />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tmon.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/font/tmon.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state />
           </provider>
         </entry>
       </file>
@@ -166,12 +207,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>analysis</find>
-      <find>analysisFeedback</find>
-      <find>topMapWeighted2</find>
-      <find>topMapWeighted</find>
-      <find>topMap</find>
-      <find>selectOuter</find>
       <find>selectTop</find>
       <find>targetStyle</find>
       <find>settop</find>
@@ -196,6 +231,12 @@
       <find>//pm</find>
       <find>//type</find>
       <find>temp</find>
+      <find>Log.d(&quot;bottomMapsize&quot;, String.valueOf(bottomMap.size())</find>
+      <find>Log</find>
+      <find>Log.d</find>
+      <find>getsex</find>
+      <find>checkgender</find>
+      <find>check</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2506,8 +2547,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/setpreferenceform.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/recommendstyleform.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/PreferenceController.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/FeedbackController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java" />
       </list>
     </option>
   </component>
@@ -2552,6 +2593,10 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="narsi2" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
@@ -2771,11 +2816,12 @@
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="1" />
       <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Build Variants" order="1" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50067115" side_tool="true" weight="0.29243937" />
       <window_info anchor="right" id="Preview" order="1" />
       <window_info anchor="bottom" id="Run" order="8" />
       <window_info anchor="bottom" id="Version Control" order="3" />
@@ -2790,16 +2836,38 @@
       <window_info id="Structure" order="5" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="2" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="bottom" id="Debug" order="9" visible="true" weight="0.29243937" />
+      <window_info anchor="bottom" id="Debug" order="9" sideWeight="0.49932885" weight="0.29243937" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="13" />
-      <window_info anchor="right" id="Commander" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.18724832" />
+      <window_info anchor="right" id="Preview" order="1" />
+      <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
+      <window_info id="Build Variants" order="1" side_tool="true" />
+      <window_info id="Structure" order="5" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="5" weight="0.3293348" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="bottom" id="Logcat" order="4" weight="0.3293348" />
+      <window_info anchor="right" id="Device File Explorer" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="9" visible="true" weight="0.29243937" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
+      <window_info id="Image Layers" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="bottom" id="Android Profiler" order="1" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="6" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3281027" />
+      <window_info anchor="bottom" id="Run" order="8" />
+      <window_info anchor="bottom" id="Build" order="0" weight="0.33238232" />
+      <window_info id="Captures" order="7" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="3" />
+      <window_info anchor="right" id="Commander" order="5" weight="0.4" />
+      <window_info id="Designer" order="0" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -2817,13 +2885,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/os/Binder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13490">
-          <caret line="761" column="9" lean-forward="true" selection-start-line="761" selection-start-column="9" selection-end-line="761" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/io/Serializable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
@@ -2880,8 +2941,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+        <state relative-caret-position="-40">
+          <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
         </state>
       </provider>
       <provider editor-type-id="android-manifest">
@@ -2951,13 +3012,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="893">
           <caret line="87" selection-start-line="87" selection-end-line="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="64" column="24" selection-start-line="64" selection-start-column="24" selection-end-line="64" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -3133,26 +3187,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/FeedbackController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="690" column="24" selection-start-line="690" selection-start-column="24" selection-end-line="690" selection-end-column="24" />
+        <state relative-caret-position="190">
+          <caret line="119" column="33" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7026#7191#0" expanded="true" />
-            <element signature="e#7190#7191#0" expanded="true" />
-            <element signature="e#44339#44340#0" expanded="true" />
-            <element signature="e#44375#44376#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/FeedbackController.java">
+    <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="119" column="33" lean-forward="true" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/csw/narsi2/recommendationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="1022" column="52" selection-start-line="1022" selection-start-column="52" selection-end-line="1022" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7026#7191#0" expanded="true" />
+            <element signature="e#7190#7191#0" expanded="true" />
+            <element signature="e#8546#9111#0" expanded="true" />
+            <element signature="e#9110#9111#0" expanded="true" />
+            <element signature="e#10501#12636#0" expanded="true" />
+            <element signature="e#12635#12636#0" expanded="true" />
+            <element signature="e#13201#15069#0" expanded="true" />
+            <element signature="e#15068#15069#0" expanded="true" />
+            <element signature="e#15448#16919#0" expanded="true" />
+            <element signature="e#16918#16919#0" expanded="true" />
+            <element signature="e#17543#18457#0" expanded="true" />
+            <element signature="e#18456#18457#0" expanded="true" />
+            <element signature="e#22935#23469#0" expanded="true" />
+            <element signature="e#23468#23469#0" expanded="true" />
+            <element signature="e#23596#24071#0" expanded="true" />
+            <element signature="e#24070#24071#0" expanded="true" />
+            <element signature="e#24163#28546#0" expanded="true" />
+            <element signature="e#24499#28518#0" expanded="true" />
+            <element signature="e#28517#28518#0" expanded="true" />
+            <element signature="e#28545#28546#0" expanded="true" />
+            <element signature="e#29172#31652#0" expanded="true" />
+            <element signature="e#30283#31603#0" expanded="true" />
+            <element signature="e#31602#31603#0" expanded="true" />
+            <element signature="e#31651#31652#0" expanded="true" />
+            <element signature="e#31812#33596#0" expanded="true" />
+            <element signature="e#33595#33596#0" expanded="true" />
+            <element signature="e#33701#35547#0" expanded="true" />
+            <element signature="e#35546#35547#0" expanded="true" />
+            <element signature="e#44339#44340#0" expanded="true" />
+            <element signature="e#44375#44376#0" expanded="true" />
           </folding>
         </state>
       </provider>

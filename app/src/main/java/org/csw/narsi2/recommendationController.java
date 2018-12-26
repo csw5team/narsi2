@@ -209,7 +209,6 @@ public class recommendationController extends Fragment {
         final Intent intent = getActivity().getIntent();
         lat = intent.getExtras().getDouble("lat");
         lng = intent.getExtras().getDouble("lng");
-        Log.d("HEll", Double.toString(lat) + Double.toString(lng));
         apiKey = "0d4f48e5-5c2c-4bb5-931a-bca3f92b47d0";
         mAuth = FirebaseAuth.getInstance();
 
@@ -351,10 +350,6 @@ public class recommendationController extends Fragment {
                     type7hour = precipitationJSON.getString("type7hour");
                     type10hour = precipitationJSON.getString("type10hour");
                     type13hour = precipitationJSON.getString("type13hour");
-                    Log.d("type4hour", type4hour);
-                    Log.d("type7hour", type7hour);
-                    Log.d("type10hour", type10hour);
-                    Log.d("type13hour", type13hour);
 
 
                     JSONObject temperatureJSON = fcst3hour.getJSONObject("temperature");
@@ -569,7 +564,6 @@ public class recommendationController extends Fragment {
                     if (document.getString("tempFeed") != null) {
 
                         preferTemp = document.getString("tempFeed");
-                        Log.d("preferTemp", preferTemp);
 
                     }
                 } else {
@@ -617,7 +611,6 @@ public class recommendationController extends Fragment {
                                             Date date2 = transFormat.parse(targetDate);
                                             long diff = date.getTime() - date2.getTime();
                                             long diffdays = diff / (24 * 60 * 60 * 1000);
-                                            Log.d("diffdays", String.valueOf(diffdays));
 
                                             if (diffdays == 21) {
                                                 if (document.getString("codiFeed") != null)
@@ -635,7 +628,6 @@ public class recommendationController extends Fragment {
 
                                             } else if (diffdays == 3) {
                                                 if (document.getString("codiFeed") != null)
-                                                    Log.d("value", document.getString("codiFeed"));
                                                 feed_3 = Integer.parseInt(document.getString("codiFeed"));
 
                                             } else if (diffdays == 2) {
@@ -654,19 +646,10 @@ public class recommendationController extends Fragment {
                                             Toast.makeText(getContext(), "피드백 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
                                         }
                                     }
-                                    Log.d("feed_1", String.valueOf(feed_1));
-                                    Log.d("feed_2", String.valueOf(feed_2));
-                                    Log.d("feed_3", String.valueOf(feed_3));
-                                    Log.d("feed_7", String.valueOf(feed_7));
-                                    Log.d("feed_14", String.valueOf(feed_14));
-                                    Log.d("feed_21", String.valueOf(feed_21));
 
                                     while (CodiStyle == null) {
                                     }
                                     analysisFeedback(CodiStyle);
-                                    Log.d("casualweight", String.valueOf(casualWeight));
-                                    Log.d("formalWeight", String.valueOf(formalWeight));
-                                    Log.d("sportyWeight", String.valueOf(sportyWeight));
                                 } else {
 
                                 }
@@ -682,9 +665,6 @@ public class recommendationController extends Fragment {
 
         final long tempTemp = Math.round((13.12 + 0.6215 * Double.parseDouble(temperature) - 11.37 * Math.pow((Double.parseDouble(avgwspd) * 3.6), 0.16) + 0.3965 * Math.pow((Double.parseDouble(avgwspd) * 3.6), 0.16) * Double.parseDouble(avgTemp)) * 100) / 100;
 
-        Log.d("avgwspd", avgwspd);
-        Log.d("avgtemp", avgTemp);
-        Log.d("tempTemp", String.valueOf(tempTemp));
 
         db.collection("user_final").document(Uid).collection("Feedback")
                 .get()
@@ -700,12 +680,10 @@ public class recommendationController extends Fragment {
                         } else {
                             Toast.makeText(getContext(), "cant open feedback", Toast.LENGTH_SHORT).show();
                         }
-                        Log.d("feedbacksum", String.valueOf(feedbackSum));
 
                         final String preferTemp2 = String.valueOf((Integer.parseInt(preferTemp) + feedbackSum));
                         UserTemp = String.valueOf((int) (tempTemp + Double.parseDouble(preferTemp2)));
 
-                        Log.d("UserTemp : ", UserTemp);
 
                         getOptimums(UserTemp);
 
@@ -715,18 +693,7 @@ public class recommendationController extends Fragment {
                                 if (Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp) >= 10) {
                                     selectOuter();
                                 }
-                                Log.d("temp_diff", String.valueOf(Integer.parseInt(highestTemp) - Integer.parseInt(lowestTemp)));
                                 calculateRecommends();
-
-                                for (Map.Entry<String, Top> elem : topMapWeighted2.entrySet()) {
-                                    Log.d("selected top", elem.getKey());
-                                }
-                                for (Map.Entry<String, Bottom> elem : bottomMapWeighted2.entrySet()) {
-                                    Log.d("selected top", elem.getKey());
-                                }
-
-                                Log.d("topmapweighted", String.valueOf(topMapWeighted2.size()));
-                                Log.d("bottommapweighted", String.valueOf(bottomMapWeighted2.size()));
 
                                 display();
                                 displayCodi();
@@ -769,7 +736,6 @@ public class recommendationController extends Fragment {
                                 }
 
                             }
-                            Log.d("topMapsize", String.valueOf(topMap.size()));
                         } else {
                         }
                     }
@@ -797,7 +763,6 @@ public class recommendationController extends Fragment {
                                 }
 
                             }
-                            Log.d("bottomMapsize", String.valueOf(bottomMap.size()));
                         } else {
                         }
                     }
@@ -939,14 +904,11 @@ public class recommendationController extends Fragment {
         }
         while (targetStyle.equals("-1")) ;
 
-        Log.d("targetStyle", targetStyle);
 
         for (Map.Entry<String, Top> elem : topMap.entrySet()) {
-            Log.d("maploop", "processing");
             if (targetStyle.equals("0")) {
                 if (elem.getValue().getFormal().equals("1")) {
                     topMapWeighted.put(elem.getKey(), topMap.get(elem.getKey()));
-                    Log.d("processing", elem.getKey());
                 }
             } else if (targetStyle.equals("1")) {
                 if (elem.getValue().getCasual().equals("1")) {
@@ -963,7 +925,6 @@ public class recommendationController extends Fragment {
     }
 
     public void selectBottom(HashMap<String, Bottom> bottomMap, String targetStyle) {
-        Log.d("selectBottom", "processing");
         int targetMax = Math.max(casualWeight, Math.max(formalWeight, sportyWeight));
         if (targetMax == formalWeight) {
             targetStyle = "0";
@@ -975,7 +936,6 @@ public class recommendationController extends Fragment {
 
         while (targetStyle.equals("-1")) ;
         for (Map.Entry<String, Bottom> elem : bottomMap.entrySet()) {
-            Log.d("maploop", "processing");
             if (targetStyle.equals("0")) {
                 if (elem.getValue().getFormal().equals("1")) {
                     bottomMapWeighted.put(elem.getKey(), bottomMap.get(elem.getKey()));
@@ -1000,8 +960,7 @@ public class recommendationController extends Fragment {
         }
     }
 
-    public void checkGender() {
-        Log.d("checkGender", "processing");
+    public void checkGender(HashMap<String, Top> topMapWeighted, HashMap<String, Bottom> bottomMapWeighted) {
         for (Map.Entry<String, Top> elem : topMapWeighted.entrySet()) {
             if (singleuser.getGender().equals("남")) {
                 if (!elem.getValue().getSex().equals("2")) {
@@ -1061,7 +1020,7 @@ public class recommendationController extends Fragment {
 
         selectTop(topMap, targetStyle);
         selectBottom(bottomMap, targetStyle);
-        checkGender();
+        checkGender(topMapWeighted,bottomMapWeighted);
     }
 
     public Codi getCodi() {
